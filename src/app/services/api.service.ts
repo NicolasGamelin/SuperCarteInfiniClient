@@ -20,4 +20,15 @@ export class ApiService {
     let result = await lastValueFrom(this.http.get<Card[]>(environment.apiUrl+'api/card/GetPlayersCards'));
     return result;
   }
+
+  async Register()
+  {
+
+  }
+
+  async Login()
+  {
+
+  }
+  
 }

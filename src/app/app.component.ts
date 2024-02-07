@@ -14,6 +14,7 @@ export class AppComponent {
 
   isLogged(){
     // TODO: Gérer l'affichage du joueur lorsqu'il est connecté
+
     return true;
   }
 
@@ -23,6 +24,7 @@ export class AppComponent {
 
   async logout() {
     // TODO: Gérer le logout
+
   }
 
 }
