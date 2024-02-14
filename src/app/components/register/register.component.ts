@@ -13,7 +13,7 @@ export class RegisterComponent {
 
   Rform:FormGroup<any>;
   RData:RegisterDTO = (new RegisterDTO("","","",""))
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,public service:ApiService) {
     this.Rform = this.fb.group({
       UserName: ['', [Validators.required]],
       Email: ['',[Validators.required]],

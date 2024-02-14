@@ -51,6 +51,6 @@
       </mat-error>
     </mat-form-field>
     </div>
-    <button mat-raised-button color="primary" [disabled]="!Rform.valid">Enregistrer</button>
+    <button (click)="service.Register(RData)" mat-raised-button color="primary" [disabled]="!Rform.valid">Enregistrer</button>
   </form>
 </mat-card>
