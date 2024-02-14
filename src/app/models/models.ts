@@ -6,6 +6,7 @@ export interface Player {
 export interface Card {
     id: number;
     name: string;
+    health: number;
     attack: number;
     defense: number;
     cost: number;

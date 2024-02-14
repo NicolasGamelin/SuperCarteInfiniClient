@@ -26,7 +26,7 @@ import {StoreComponent} from "./components/store/store.component";
     PlayerhandComponent,
     EnemyhandComponent,
     HealthComponent,
-    StoreComponent
+    StoreComponent,
    ],
   imports: [
     BrowserModule,
