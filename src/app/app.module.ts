@@ -14,6 +14,9 @@ import { PlayerhandComponent } from './match/playerhand/playerhand.component';
 import { EnemyhandComponent } from './match/enemyhand/enemyhand.component';
 import { HealthComponent } from './match/health/health.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
     PlayerhandComponent,
     EnemyhandComponent,
     HealthComponent,
+    RegisterComponent,
+    LoginComponent,
    ],
   imports: [
     BrowserModule,
@@ -32,7 +37,9 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    CanvasJSAngularChartsModule
+    CanvasJSAngularChartsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   bootstrap: [AppComponent]
 })
