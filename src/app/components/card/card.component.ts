@@ -21,11 +21,11 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCards();
+    this.getPlayerCards();
   }
 
- async getCards(){
-    let res = await lastValueFrom(this.http.get<Card[]>('http://localhost:5057/api/Card/GetAllCards'));
+  async getPlayerCards(){
+    let res = await lastValueFrom(this.http.get<Card[]>('http://localhost:5057/api/Card/GetPlayersCards'));
     this.cards = res;
     console.log(res);
   }
