@@ -1,7 +1,24 @@
-<div style="display: flex; margin: 20px; justify-content: center;">
-  <button mat-raised-button  [routerLink]="['/cards']" style="margin-right: 20px;"  >Mes Cartes</button>
-  <button mat-raised-button  [routerLink]="['/store']" color="primary" style="margin-right: 20px;"  >Magasin</button>
-  <button mat-raised-button color="accent" style="margin-right: 20px;" (click)="joinMatch()">Joindre une partie</button>
-</div>
-<router-outlet></router-outlet>
+
+<div *ngIf="searching" (click)="searching = false"  class="unfocus"></div>
+  <div style="display: flex; margin: 20px; justify-content: center;">
+    <button mat-raised-button  [routerLink]="['/cards']" style="margin-right: 20px;"  >Mes Cartes</button>
+    <button mat-raised-button  [routerLink]="['/store']" color="primary" style="margin-right: 20px;"  >Magasin</button>
+    <button mat-raised-button color="accent" style="margin-right: 20px;" (click)="joinMatch()">Joindre une partie</button>
+  </div>
+
+  <div *ngIf="searching" class="search-dialog">
+    <div class="wait-bar">
+      <div class="scrolling-bar"></div>
+    </div>
+    En attente d'un autre joueur
+
+    <div>
+
+      <button (click)="searching = false" mat-raised-button style="justify-content: start">
+        Annuler
+      </button>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+
 
