@@ -7,7 +7,7 @@ import {LoginComponent} from "./components/login/login.component";
 
 const routes: Routes = [
   { path: 'match/:id', component: MatchComponent },
-  { path: '', component: RegisterComponent },
+  { path: '', component: LoginComponent },
   { path: 'Login', component: LoginComponent },
   { path: 'Home', component: HomeComponent, children: [
 
