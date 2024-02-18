@@ -18,7 +18,7 @@
     <div>
       <mat-form-field>
         <label>Password</label>
-        <input formControlName = 'Password'  matInput type="text" placeholder="Votre mot de passe" >
+        <input formControlName = 'Password'  matInput type="text" placeholder="Votre mot de passe" name="Password" >
         <mat-error *ngIf="Rform.get('Password')?.errors?.['PasswordInvalide']" >
           Votre Password est invalide!
         </mat-error>

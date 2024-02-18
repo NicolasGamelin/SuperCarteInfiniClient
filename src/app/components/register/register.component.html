@@ -16,7 +16,7 @@
     <div>
     <mat-form-field>
       <label>Email</label>
-      <input formControlName = 'Email'  matInput type="text" placeholder="Votre Email" >
+      <input formControlName = 'Email'  matInput type="text" placeholder="Votre Email" name ="Email" >
       <mat-error *ngIf="Rform.get('Email')?.errors?.['EmailInvalide']" >
         Votre Email est invalide!
       </mat-error>
@@ -29,7 +29,7 @@
     <div>
     <mat-form-field>
       <label>Password</label>
-      <input formControlName = 'Password'  matInput type="text" placeholder="Votre mot de passe" >
+      <input formControlName = 'Password'  matInput type="text" placeholder="Votre mot de passe" name="Password" >
       <mat-error *ngIf="Rform.get('Password')?.errors?.['PasswordInvalide']" >
         Votre Password est invalide!
       </mat-error>
@@ -42,7 +42,7 @@
     <div>
     <mat-form-field>
       <label>Confirm your password</label>
-      <input formControlName = 'PasswordConfirm' matInput type="text" placeholder="Confirmer votre mot de passe" >
+      <input formControlName = 'PasswordConfirm' matInput type="text" placeholder="Confirmer votre mot de passe" name="PasswordConfirm" >
       <mat-error *ngIf="Rform.get('PasswordConfirm')?.errors?.['PasswordConfirmInvalide']" >
         Votre Password est invalide!
       </mat-error>

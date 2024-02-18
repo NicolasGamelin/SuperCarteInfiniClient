@@ -26,44 +26,44 @@ export class RegisterComponent {
     });
   }
 
-  registerValidator(control: AbstractControl): ValidationErrors | null {
+  registerValidator(control: AbstractControl):  null {
 
     const UserName = control.get('UserName')?.value;
     const Email = control.get ('Email')?.value
     const Password = control.get('Password')?.value;
     const PasswordConirm = control.get ('PasswordConfirm')?.value
 
-    let atLeastOneMistake:boolean = false;
+
 
       if(UserName == "") {
         control.get('UserName')?.setErrors({NomInvalide:true});
-        atLeastOneMistake = true;
+
       } else {
         control.get('UserName')?.setErrors(null);
     }
 
     if(Email == "") {
       control.get('Email')?.setErrors({EmailInvalide:true});
-      atLeastOneMistake = true;
+
     } else {
       control.get('Email')?.setErrors(null);
     }
 
     if(Password == "") {
       control.get('Password')?.setErrors({PasswordInvalide:true});
-      atLeastOneMistake = true;
+
     } else {
       control.get('Password')?.setErrors(null);
     }
 
     if(PasswordConirm == "") {
       control.get('PasswordConfirm')?.setErrors({PasswordConfirmInvalide:true});
-      atLeastOneMistake = true;
+
     } else {
       control.get('PasswordConfirm')?.setErrors(null);
     }
 
-    return atLeastOneMistake?{atLeastOneMistake:true}:null;
+    return null;
   }
 
 
