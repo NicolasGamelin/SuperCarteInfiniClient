@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(public router: Router, public match: MatchService) { }
 
   searching:boolean = false;
+  searchingIndex:number = -1;
   ngOnInit() {
 
   }
@@ -22,9 +23,11 @@ export class HomeComponent implements OnInit {
   async joinMatch() {
 
     this.searching = true;
+    this.searchingIndex++;
+    let i = this.searchingIndex;
     await this.delay(30000);
     //prob pas tres bon
-    if(this.searching){
+    if(this.searching && i == this.searchingIndex){
       let matchId = -1;
      await this.router.navigate(['/match/' + matchId]);
       this.searching = false;
