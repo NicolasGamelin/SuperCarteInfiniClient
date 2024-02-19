@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { Card } from '../models/models';
@@ -17,7 +17,15 @@ export class ApiService {
   }
 
   async getPlayersCards(): Promise<Card[]> {
-    let result = await lastValueFrom(this.http.get<Card[]>(environment.apiUrl+'api/card/GetPlayersCards'));
+    const headerDict = {
+      "Access-Control-Allow-Origin": "http://localhost:4200"
+    };
+
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new HttpHeaders(headerDict),
+    };
+
+    let result = await lastValueFrom(this.http.get<Card[]>(environment.apiUrl+'api/card/GetPlayersCards', requestOptions));
     return result;
   }
 }

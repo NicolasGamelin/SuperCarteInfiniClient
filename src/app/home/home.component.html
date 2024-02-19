@@ -1,5 +1,7 @@
 <div style="display: flex; margin: 20px; justify-content: center;">
-  <button mat-raised-button color="accent" style="margin-right: 20px;" (click)="joinMatch()">Joindre une partie</button>
+  <p>user1 ?</p>
+  <input checked type="checkbox" name="user 1" id="user" #user>
+  <button mat-raised-button color="accent" style="margin-right: 20px;" (click)="joinMatch(user.checked)">Joindre une partie</button>
 </div>
 <router-outlet></router-outlet>
 
