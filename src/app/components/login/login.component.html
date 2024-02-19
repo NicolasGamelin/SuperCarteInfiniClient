@@ -4,11 +4,8 @@
       <mat-form-field>
         <label>Name</label>
         <input matInput  placeholder ="Votre Nom" formControlName = "UserName" name ="UserName" >
-        <mat-error *ngIf="Rform.get('UserName')?.errors?.['NomInvalide']" >
-          Votre Nom est invalide!
-        </mat-error>
         <mat-error *ngIf="Rform.get('UserName')?.errors?.['required']">
-          Cettre réponse est <strong>requise</strong>
+         Le UserName est <strong>requis</strong>
         </mat-error>
       </mat-form-field>
     </div>
@@ -19,11 +16,8 @@
       <mat-form-field>
         <label>Password</label>
         <input formControlName = 'Password'  matInput type="text" placeholder="Votre mot de passe" name="Password" >
-        <mat-error *ngIf="Rform.get('Password')?.errors?.['PasswordInvalide']" >
-          Votre Password est invalide!
-        </mat-error>
         <mat-error *ngIf="Rform.get('Password')?.errors?.['required']">
-          Cettre réponse est <strong>requise</strong>
+         Le Password est <strong>requis</strong>
         </mat-error>
       </mat-form-field>
     </div>

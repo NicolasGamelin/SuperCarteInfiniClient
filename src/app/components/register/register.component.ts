@@ -16,54 +16,29 @@ export class RegisterComponent {
   constructor(private fb: FormBuilder,public service:ApiService) {
     this.Rform = this.fb.group({
       UserName: ['', [Validators.required]],
-      Email: ['',[Validators.required]],
-       Password: ['',[Validators.required]],
+      Email: ['',[Validators.required,Validators.email]],
+       Password: ['',[Validators.required,Validators.maxLength(25)]],
       PasswordConfirm: ['',[Validators.required]],
-    }, {validators: this.registerValidator});
+    }, { validators: this.PasswordValidator });
 
     this.Rform.valueChanges.subscribe(() => {
       this.RData = this.Rform.value;
     });
   }
 
-  registerValidator(control: AbstractControl):  null {
+  PasswordValidator(control: AbstractControl): ValidationErrors | null  {
 
-    const UserName = control.get('UserName')?.value;
-    const Email = control.get ('Email')?.value
     const Password = control.get('Password')?.value;
     const PasswordConirm = control.get ('PasswordConfirm')?.value
 
 
-
-      if(UserName == "") {
-        control.get('UserName')?.setErrors({NomInvalide:true});
-
-      } else {
-        control.get('UserName')?.setErrors(null);
-    }
-
-    if(Email == "") {
-      control.get('Email')?.setErrors({EmailInvalide:true});
-
-    } else {
-      control.get('Email')?.setErrors(null);
-    }
-
-    if(Password == "") {
-      control.get('Password')?.setErrors({PasswordInvalide:true});
-
-    } else {
-      control.get('Password')?.setErrors(null);
-    }
-
-    if(PasswordConirm == "") {
+     if(PasswordConirm != Password  ) {
       control.get('PasswordConfirm')?.setErrors({PasswordConfirmInvalide:true});
-
-    } else {
-      control.get('PasswordConfirm')?.setErrors(null);
     }
 
-    return null;
+
+
+    return null
   }
 
 
