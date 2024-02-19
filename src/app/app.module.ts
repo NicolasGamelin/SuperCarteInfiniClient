@@ -15,6 +15,7 @@ import { EnemyhandComponent } from './match/enemyhand/enemyhand.component';
 import { HealthComponent } from './match/health/health.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import {StoreComponent} from "./components/store/store.component";
+import {CardsComponent} from "./components/cards/cards.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {StoreComponent} from "./components/store/store.component";
     EnemyhandComponent,
     HealthComponent,
     StoreComponent,
+    CardsComponent
    ],
   imports: [
     BrowserModule,
