@@ -12,7 +12,7 @@ import {RegisterDTO} from "../models/RegisterDTO";
 export class ApiService {
 
   constructor(public http: HttpClient) { }
-
+  public localStorageKey = 'username';
 
 
   async getAllCards(): Promise<Card[]> {
@@ -27,17 +27,23 @@ export class ApiService {
 
   async Register(user:RegisterDTO)
   {
-let r = await lastValueFrom(this.http.post('https://localhost:7219/api/Account/Register',user))
+let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Account/Register',user))
   }
 
   async Login(user:LoginDTO)
   {
-    let r = await lastValueFrom(this.http.post('https://localhost:7219/api/Account/Login',user))
+    let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Account/Login',user))
+    localStorage.setItem(this.localStorageKey, r.userName);
+    console.log(r.userName)
   }
 
   async Logout()
   {
-let r = await  lastValueFrom(this.http.get('https://localhost:7219/api/Account/Logout'))
+let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/Logout'))
+    localStorage.removeItem(this.localStorageKey);
   }
-
+async Private()
+  {
+    let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/Private'))
+  }
 }
