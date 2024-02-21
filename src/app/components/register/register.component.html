@@ -20,6 +20,7 @@
       <mat-error *ngIf="Rform.get('Email')?.errors?.['email']">
        Email Invalide
       </mat-error>
+
     </mat-form-field>
     </div>
 
@@ -29,6 +30,9 @@
       <input formControlName = 'Password'  matInput type="text" placeholder="Votre mot de passe" name="Password" >
       <mat-error *ngIf="Rform.get('Password')?.errors?.['required']">
         Le Password est <strong>requis</strong>
+      </mat-error>
+      <mat-error *ngIf="Rform.get('Password')?.errors?.['minLength']">
+       minimum de 12 caratères
       </mat-error>
     </mat-form-field>
     </div>
@@ -47,5 +51,6 @@
     </div>
     <br>
     <button (click)="service.Register(RData)" mat-raised-button color="primary" [disabled]="!Rform.valid">Enregistrer</button>
+    <button routerLink="" mat-raised-button color="primary" [disabled]="!Rform.valid">Connecter</button>
   </form>
 </mat-card>

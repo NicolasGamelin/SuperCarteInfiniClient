@@ -35,11 +35,17 @@ export class RegisterComponent {
      if(PasswordConirm != Password  ) {
       control.get('PasswordConfirm')?.setErrors({PasswordConfirmInvalide:true});
     }
-if (PasswordConirm == Password){
-  control.get('PasswordConfirm')?.setErrors(null);
+
+     if (Password == "")
+     {
+       control.get('Password')?.setErrors({required:true});
+     }
+     else
+if (Password.length < 12)
+
+{
+  control.get('Password')?.setErrors({minLength:true});
 }
-
-
     return null
   }
 
