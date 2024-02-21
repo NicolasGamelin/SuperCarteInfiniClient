@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { MatchService } from '../services/match.service';
-import * as signalR from '@microsoft/signalr';
+import { hubService } from '../services/hub.service';
 
 @Component({
   selector: 'app-home',
@@ -10,14 +10,10 @@ import * as signalR from '@microsoft/signalr';
 })
 export class HomeComponent implements OnInit {
 
-  public hubConnection: signalR.HubConnection = new signalR.HubConnectionBuilder()
-  .withUrl('https://localhost:7219/matchHub')
-  .build();
-
-  constructor(public router: Router, public match: MatchService) { }
+  constructor(public router: Router, public match: MatchService, public hubService: hubService) { }
 
   ngOnInit() {
-
+    this.hubService.connectToHub()
   }
 
   async joinMatch(user1: boolean) {
@@ -32,27 +28,17 @@ export class HomeComponent implements OnInit {
       localStorage.setItem("playerId", "1");
     else
       localStorage.setItem("playerId", "2");
-
-    await this.connectToHub();
     
-    this.hubConnection.invoke('joinMatch', userId);
-  }
+    this.hubService.joinMatch(userId)
 
-  async connectToHub(){
-    await this.hubConnection
-      .start()
-      .then(() => {
-          console.log('La connexion est active!');
+    this.hubService.hubConnection.on('redirectToMatch', (data: any) => {
+      this.router.navigateByUrl('/match/'+data)
+      console.log(data);
+    })
 
-          this.hubConnection!.on('joiningMatch', (data: any) => {
-              console.log(data);
-          })
-        
-          this.hubConnection!.on('UneAutreFonction', (data: any) => {
-              console.log(data);
-          })
-      })
-      .catch((err: any) => console.log('Error while starting connection: ' + err));
+    this.hubService.hubConnection!.on('joiningMatch', (data: any) => {
+      console.log(data);
+    })
   }
 }
 

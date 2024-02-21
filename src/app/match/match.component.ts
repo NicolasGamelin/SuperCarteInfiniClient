@@ -3,6 +3,7 @@ import { MatchData, PlayerData } from '../models/models';
 import { MatchService } from './../services/match.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
+import { hubService } from '../services/hub.service';
 
 @Component({
   selector: 'app-match',
@@ -13,13 +14,13 @@ export class MatchComponent implements OnInit {
 
   matchData:MatchData|null = null;
 
-  constructor(private route: ActivatedRoute, public router: Router, public matchService:MatchService, public apiService:ApiService) { }
+  constructor(private route: ActivatedRoute, public router: Router, public matchService:MatchService, public apiService:ApiService, public hubService: hubService) { }
 
   async ngOnInit() {
     let matchId:number  = parseInt(this.route.snapshot.params["id"]);
     // TODO Tâche Hub: Se connecter au Hub et obtenir le matchData
     // Test: À retirer une fois que le Hub est fonctionnel
-    await this.initTest();
+    //await this.initTest();
   }
 
   async initTest() {
