@@ -14,8 +14,8 @@ export class ApiService {
 
   constructor(public http: HttpClient,public cookie:CookieService) { }
   public localStorageKey = 'username';
-
-
+Loginerr: string = ""
+Username: string[] = []
   async getAllCards(): Promise<Card[]> {
     let result = await lastValueFrom(this.http.get<Card[]>(environment.apiUrl+'api/card/GetAllCards'));
     return result;
@@ -37,6 +37,9 @@ let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Acco
     let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Account/Login',user))
     localStorage.setItem(this.localStorageKey, r.userName);
     console.log(r.userName)
+    console.log(r.error)
+    this.Loginerr = r
+
   }
 
   async Logout()
@@ -50,5 +53,13 @@ async Private()
 
     let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/PrivateData'))
     console.log(r)
+  }
+
+  async GetAllUserName()
+  {
+
+    let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/GetAllUser'))
+    console.log(r)
+    this.Username = r
   }
 }

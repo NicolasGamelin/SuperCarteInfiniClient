@@ -7,6 +7,9 @@
       <mat-error *ngIf="Rform.get('UserName')?.errors?.['required']">
         Le UserName est <strong>requis</strong>
       </mat-error>
+      <mat-error *ngIf="Rform.get('UserName')?.errors?.['UsernameExist']">
+        Le UserName est <strong>exist</strong>
+      </mat-error>
     </mat-form-field>
 </div>
 
