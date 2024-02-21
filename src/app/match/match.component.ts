@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatchData, PlayerData } from '../models/models';
+import { Match, MatchData, Player, PlayerData } from '../models/models';
 import { MatchService } from './../services/match.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
@@ -21,6 +21,28 @@ export class MatchComponent implements OnInit {
     // TODO Tâche Hub: Se connecter au Hub et obtenir le matchData
     // Test: À retirer une fois que le Hub est fonctionnel
     //await this.initTest();
+
+    await this.hubService.connectToHub();
+
+    this.hubService.hubConnection.on('matchData', (data: any) => {
+      data = JSON.parse(data)
+      this.matchData = <MatchData>{}
+      this.matchData.match = data as Match
+      
+      let playerA = <Player>{}
+      playerA.id = data.PlayerDataA.Player.Id
+      playerA.name = data.PlayerDataA.Player.Name
+      this.matchData.playerA = playerA
+
+      let playerB = <Player>{}
+      playerB.id = data.PlayerDataB.Player.Id
+      playerB.name = data.PlayerDataB.Player.Name
+      this.matchData.playerB = playerB
+
+      this.matchData.winningPlayerId = data.WinnerUserId
+    })
+
+    this.hubService.getmatchData(matchId)
   }
 
   async initTest() {

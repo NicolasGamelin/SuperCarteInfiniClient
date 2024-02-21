@@ -1,14 +1,15 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import * as signalR from "@microsoft/signalr";
+import { Match } from "../models/models";
 
 @Injectable({
     providedIn: 'root'
   })
 export class hubService {
     public hubConnection: signalR.HubConnection = new signalR.HubConnectionBuilder()
-    .withUrl('https://localhost:7219/matchHub')
-    .build();
+        .withUrl('https://localhost:7219/matchHub')
+        .build();
 
     constructor(public router: Router) {}
 
@@ -23,5 +24,9 @@ export class hubService {
 
     joinMatch(userId: string){
         this.hubConnection.invoke('joinMatch', userId);
+    }
+
+    getmatchData(matchId: number){
+        this.hubConnection.invoke('getMatchData', matchId)
     }
 }

@@ -35,7 +35,7 @@ export interface PlayableCard {
 
 export interface PlayerData {
     id:number;
-	  health: number;
+	health: number;
     maxhealth: number;
     mana: number;
     playerId: number;
