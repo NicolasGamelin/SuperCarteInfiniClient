@@ -28,8 +28,8 @@ export class ApiService {
 
   async Register(user:RegisterDTO)
   {
-    let options = { withCredentials:true };
-let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Account/Register',user,options))
+
+let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Account/Register',user))
   }
 
   async Login(user:LoginDTO)
@@ -41,14 +41,14 @@ let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Acco
 
   async Logout()
   {
-    let options = { withCredentials:true };
-let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/Logout',options))
+
+let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/Logout'))
     localStorage.removeItem(this.localStorageKey);
   }
 async Private()
   {
-    let options = { withCredentials:true };
-    let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/PrivateData',options))
+
+    let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/PrivateData'))
     console.log(r)
   }
 }
