@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { CardComponent } from './components/card/card.component';
 import { HomeComponent  } from './home/home.component';
 import { MatchComponent } from './match/match.component';
@@ -17,6 +17,10 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
+import {CookieService} from "ngx-cookie-service";
+import {InterceptorinterceptorInterceptor} from "./interceptorinterceptor.interceptor";
+
+
 
 @NgModule({
   declarations: [
@@ -39,8 +43,10 @@ import {FormsModule,ReactiveFormsModule} from "@angular/forms";
     HttpClientModule,
     CanvasJSAngularChartsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: InterceptorinterceptorInterceptor, multi: true },CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

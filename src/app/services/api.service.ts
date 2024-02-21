@@ -5,13 +5,14 @@ import { Card } from '../models/models';
 import { environment } from 'src/environments/environment';
 import {LoginDTO} from "../models/LoginDTO";
 import {RegisterDTO} from "../models/RegisterDTO";
+import {CookieService} from "ngx-cookie-service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient,public cookie:CookieService) { }
   public localStorageKey = 'username';
 
 
@@ -27,7 +28,8 @@ export class ApiService {
 
   async Register(user:RegisterDTO)
   {
-let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Account/Register',user))
+    let options = { withCredentials:true };
+let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Account/Register',user,options))
   }
 
   async Login(user:LoginDTO)
@@ -39,11 +41,14 @@ let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Acco
 
   async Logout()
   {
-let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/Logout'))
+    let options = { withCredentials:true };
+let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/Logout',options))
     localStorage.removeItem(this.localStorageKey);
   }
 async Private()
   {
-    let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/Private'))
+    let options = { withCredentials:true };
+    let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/PrivateData',options))
+    console.log(r)
   }
 }

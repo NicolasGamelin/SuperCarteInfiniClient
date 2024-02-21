@@ -15,8 +15,8 @@ export class AppComponent {
 
   isLogged(){
     // TODO: Gérer l'affichage du joueur lorsqu'il est connecté
+    return this.service.cookie.get(".AspNetCore.Identity.Application");
 
-    return true;
   }
 
   getUsername(){
