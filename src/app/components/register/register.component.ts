@@ -17,7 +17,7 @@ export class RegisterComponent {
     this.Rform = this.fb.group({
       UserName: ['', [Validators.required]],
       Email: ['',[Validators.required,Validators.email]],
-       Password: ['',[Validators.required,Validators.maxLength(25)]],
+       Password: ['',[Validators.required,Validators.minLength(12)]],
       PasswordConfirm: ['',[Validators.required]],
     }, { validators: this.PasswordValidator });
 
