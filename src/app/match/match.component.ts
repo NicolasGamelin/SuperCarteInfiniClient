@@ -128,11 +128,13 @@ export class MatchComponent implements OnInit {
 
   surrender() {
     // TODO Tâche Hub: Faire l'action sur le Hub
-    let fakeEndMatchEvent = {
-      $type: "EndMatch",
-      WinningPlayerId: this.matchService.adversaryData?.playerId
-    }
-    this.matchService.applyEvent(fakeEndMatchEvent);
+    //let fakeEndMatchEvent = {
+    //  $type: "EndMatch",
+    //  WinningPlayerId: this.matchService.adversaryData?.playerId
+    //}
+    //this.matchService.applyEvent(fakeEndMatchEvent);
+
+    this.hubService.Surrender(this.matchData?.match.id!, localStorage.getItem('playerId')!)
   }
 
   isVictory() {

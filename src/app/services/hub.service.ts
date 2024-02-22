@@ -108,6 +108,10 @@ export class hubService {
             this.hubConnection!.on('EndTurn', (data: any) => {
                 this.matchService.applyEvent(JSON.parse(data));
             })
+
+            this.hubConnection!.on('Surrender', (data: any) => {
+                this.matchService.applyEvent(JSON.parse(data));
+            })
           })
           .catch((err: any) => console.log('Error while starting connection: ' + err));
     }
@@ -122,5 +126,9 @@ export class hubService {
 
     EndTurn(matchId: number, userId: string){
         this.hubConnection.invoke('EndTurn', matchId.toString(), userId.toString())
+    }
+
+    Surrender(matchId: number, userId: string){
+        this.hubConnection.invoke('Surrender', matchId.toString(), userId.toString())
     }
 }
