@@ -29,15 +29,10 @@ export class HomeComponent implements OnInit {
     else
       localStorage.setItem("playerId", "2");
     
-    this.hubService.joinMatch(userId)
+    this.hubService.joinMatch(userId, null)
 
     this.hubService.hubConnection.on('redirectToMatch', (data: any) => {
       this.router.navigateByUrl('/match/'+data)
-      console.log(data);
-    })
-
-    this.hubService.hubConnection!.on('joiningMatch', (data: any) => {
-      console.log(data);
     })
   }
 }

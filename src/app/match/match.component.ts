@@ -22,27 +22,17 @@ export class MatchComponent implements OnInit {
     // Test: À retirer une fois que le Hub est fonctionnel
     //await this.initTest();
 
-    await this.hubService.connectToHub();
+    this.hubService.connectToHub()
+    let match = await this.hubService.getmatchData(matchId)
+    this.matchData = <MatchData>{}
+    this.matchData.match = match
+    this.matchData.playerA = <Player>{}
+    this.matchData.playerA.id = this.matchData.match.playerDataA.id
+    this.matchData.playerA.name = match.playerDataA.player.name
 
-    this.hubService.hubConnection.on('matchData', (data: any) => {
-      data = JSON.parse(data)
-      this.matchData = <MatchData>{}
-      this.matchData.match = data as Match
-      
-      let playerA = <Player>{}
-      playerA.id = data.PlayerDataA.Player.Id
-      playerA.name = data.PlayerDataA.Player.Name
-      this.matchData.playerA = playerA
-
-      let playerB = <Player>{}
-      playerB.id = data.PlayerDataB.Player.Id
-      playerB.name = data.PlayerDataB.Player.Name
-      this.matchData.playerB = playerB
-
-      this.matchData.winningPlayerId = data.WinnerUserId
-    })
-
-    this.hubService.getmatchData(matchId)
+    this.matchData.playerB = <Player>{}
+    this.matchData.playerB.id = this.matchData.match.playerDataB.id
+    this.matchData.playerB.name = match.playerDataB.player.name
   }
 
   async initTest() {
@@ -90,47 +80,50 @@ export class MatchComponent implements OnInit {
   async endTurn() {
     // TODO Tâche Hub: Faire l'action sur le Hub
     // Pour TEST
-    let events = this.createDrawCardEventsForTest(this.matchService.adversaryData!, 1);
-    events.push({
-      $type: "GainMana",
-      Mana: 3,
-      PlayerId: this.matchService.adversaryData?.playerId
-    });
+    //let events = this.createDrawCardEventsForTest(this.matchService.adversaryData!, 1);
+    //events.push({
+    //  $type: "GainMana",
+    //  Mana: 3,
+    //  PlayerId: this.matchService.adversaryData?.playerId
+    //});
 
-    let fakeStartTurnEvent = {
-      $type: "PlayerStartTurn",
-      PlayerId: this.matchService.adversaryData?.playerId,
-      Events: events
-    }
+    //let fakeStartTurnEvent = {
+    //  $type: "PlayerStartTurn",
+    //  PlayerId: this.matchService.adversaryData?.playerId,
+    //  Events: events
+    //}
 
-    let fakeEndTurnEvent = {
-      $type: "PlayerEndTurn",
-      PlayerId: this.matchService.playerData?.playerId,
-      Events: [fakeStartTurnEvent]
-    }
-    await this.matchService.applyEvent(fakeEndTurnEvent);
+    //let fakeEndTurnEvent = {
+    //  $type: "PlayerEndTurn",
+    //  PlayerId: this.matchService.playerData?.playerId,
+    //  Events: [fakeStartTurnEvent]
+    //}
+    //await this.matchService.applyEvent(fakeEndTurnEvent);
 
     // On attend 3 secondes pour faire semblant que l'autre joueur attend pour terminer son tour
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    events = this.createDrawCardEventsForTest(this.matchService.playerData!, 1);
-    events.push({
-      $type: "GainMana",
-      Mana: 3,
-      PlayerId: this.matchService.playerData?.playerId
-    });
+    //await new Promise(resolve => setTimeout(resolve, 3000));
+    //events = this.createDrawCardEventsForTest(this.matchService.playerData!, 1);
+    //events.push({
+    //  $type: "GainMana",
+    //  Mana: 3,
+    //  PlayerId: this.matchService.playerData?.playerId
+    //});
 
-    fakeStartTurnEvent = {
-      $type: "PlayerStartTurn",
-      PlayerId: this.matchService.playerData?.playerId,
-      Events: events
-    }
+    //fakeStartTurnEvent = {
+    //  $type: "PlayerStartTurn",
+    //  PlayerId: this.matchService.playerData?.playerId,
+    //  Events: events
+    //}
 
-    fakeEndTurnEvent = {
-      $type: "PlayerEndTurn",
-      PlayerId: this.matchService.adversaryData?.playerId,
-      Events: [fakeStartTurnEvent]
-    }
-    await this.matchService.applyEvent(fakeEndTurnEvent);
+    //fakeEndTurnEvent = {
+    //  $type: "PlayerEndTurn",
+    //  PlayerId: this.matchService.adversaryData?.playerId,
+    //  Events: [fakeStartTurnEvent]
+    //}
+    //await this.matchService.applyEvent(fakeEndTurnEvent);
+
+    console.log(this.matchData)
+    this.hubService.EndTurn(this.matchData?.match.id!, localStorage.getItem('playerId')!)
   }
 
   surrender() {
