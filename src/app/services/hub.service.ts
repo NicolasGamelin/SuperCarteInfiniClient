@@ -16,6 +16,10 @@ export class hubService {
     constructor(public router: Router, public matchService: MatchService) {}
 
     async connectToHub(){
+        this.hubConnection.onreconnecting((error?: Error) => {
+            console.log("Hub connection lost, reconnecting...");
+        })
+
         await this.hubConnection
           .start()
           .then(() => {

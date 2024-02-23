@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   constructor(public router: Router, public match: MatchService, public hubService: hubService) { }
 
-  ngOnInit() { }
+  ngOnInit() { this.hubService.connectToHub()}
 
   async joinMatch(user1: boolean) {
     // TODO: Anuglar: Afficher un dialogue qui montre que l'on attend de joindre un match
