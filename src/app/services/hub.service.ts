@@ -10,6 +10,7 @@ import { MatchService } from "./match.service";
 export class hubService {
     public hubConnection: signalR.HubConnection = new signalR.HubConnectionBuilder()
         .withUrl('https://localhost:7219/matchHub')
+        .withAutomaticReconnect()
         .build();
 
     constructor(public router: Router, public matchService: MatchService) {}
@@ -116,19 +117,31 @@ export class hubService {
           .catch((err: any) => console.log('Error while starting connection: ' + err));
     }
 
-    joinMatch(userId: string, matchId: number|null){
+    async joinMatch(userId: string, matchId: number|null){
+        if (this.hubConnection.state == "Disconnected"){
+            await this.connectToHub()
+        }
         this.hubConnection.invoke('joinMatch', userId, matchId);
     }
 
-    getmatchData(matchId: number){
+    async getmatchData(matchId: number){
+        if (this.hubConnection.state == "Disconnected"){
+            await this.connectToHub()
+        }
         return this.hubConnection.invoke('getMatchData', matchId)
     }
 
-    EndTurn(matchId: number, userId: string){
+    async EndTurn(matchId: number, userId: string){
+        if (this.hubConnection.state == "Disconnected"){
+            await this.connectToHub()
+        }
         this.hubConnection.invoke('EndTurn', matchId.toString(), userId.toString())
     }
 
-    Surrender(matchId: number, userId: string){
+    async Surrender(matchId: number, userId: string){
+        if (this.hubConnection.state == "Disconnected"){
+            await this.connectToHub()
+        }
         this.hubConnection.invoke('Surrender', matchId.toString(), userId.toString())
     }
 }

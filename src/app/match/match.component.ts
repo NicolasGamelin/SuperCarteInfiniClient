@@ -22,7 +22,6 @@ export class MatchComponent implements OnInit {
     // Test: À retirer une fois que le Hub est fonctionnel
     //await this.initTest();
 
-    this.hubService.connectToHub()
     let match = await this.hubService.getmatchData(matchId)
     this.matchData = <MatchData>{}
     this.matchData.match = match
@@ -123,10 +122,10 @@ export class MatchComponent implements OnInit {
     //await this.matchService.applyEvent(fakeEndTurnEvent);
 
     console.log(this.matchData)
-    this.hubService.EndTurn(this.matchData?.match.id!, localStorage.getItem('playerId')!)
+    await this.hubService.EndTurn(this.matchData?.match.id!, localStorage.getItem('playerId')!)
   }
 
-  surrender() {
+  async surrender() {
     // TODO Tâche Hub: Faire l'action sur le Hub
     //let fakeEndMatchEvent = {
     //  $type: "EndMatch",
@@ -134,7 +133,7 @@ export class MatchComponent implements OnInit {
     //}
     //this.matchService.applyEvent(fakeEndMatchEvent);
 
-    this.hubService.Surrender(this.matchData?.match.id!, localStorage.getItem('playerId')!)
+    await this.hubService.Surrender(this.matchData?.match.id!, localStorage.getItem('playerId')!)
   }
 
   isVictory() {
