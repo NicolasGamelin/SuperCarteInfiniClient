@@ -19,6 +19,8 @@ import { LoginComponent } from './components/login/login.component';
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {CookieService} from "ngx-cookie-service";
 import {InterceptorinterceptorInterceptor} from "./interceptorinterceptor.interceptor";
+import {StoreComponent} from "./components/store/store.component";
+import {CardsComponent} from "./components/cards/cards.component";
 
 
 
@@ -34,6 +36,8 @@ import {InterceptorinterceptorInterceptor} from "./interceptorinterceptor.interc
     HealthComponent,
     RegisterComponent,
     LoginComponent,
+    StoreComponent,
+    CardsComponent
    ],
   imports: [
     BrowserModule,

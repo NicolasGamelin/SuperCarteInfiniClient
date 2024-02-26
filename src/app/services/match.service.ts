@@ -125,6 +125,14 @@ export class MatchService {
 
       case "GainMana": {
         // TODO
+        let playerData = this.getPlayerData(event.PlayerId);
+
+          playerData!.mana += event.Mana;
+
+        // if(playerData?.playerId == this.playerData?.playerId)
+        // if(playerData?.playerId == this.adversaryData?.playerId)
+        //   this.adversaryData!.mana += event.Mana;
+
         break;
       }
 

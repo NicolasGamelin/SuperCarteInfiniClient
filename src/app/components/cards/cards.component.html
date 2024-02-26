@@ -1,0 +1,7 @@
+
+<div class="card-list">
+  <app-card *ngFor="let card of cards" [health]="card.health" [card]="card" [id]="card.id" class="card fadeIn"></app-card>
+</div>
+<mat-card *ngIf="show=='back'"  class="infinite-card" style="background-image: url({{beautifulBackUrl}});">
+
+</mat-card>
