@@ -7,5 +7,6 @@
     {{getUsername()}}
   </mat-chip>
   <button mat-raised-button color="warn" *ngIf="isLogged()" (click)="logout()">Se déconnecter</button>
+  <button mat-raised-button color="accent"  (click)="service.Private()">Test</button>
 </mat-toolbar>
 <router-outlet></router-outlet>
