@@ -6,7 +6,6 @@
         <input matInput  placeholder ="Votre Nom" formControlName = "UserName" name ="UserName" >
         <mat-error *ngIf="Rform.get('UserName')?.errors?.['required']">
          Le UserName est <strong>requis</strong>
-
         </mat-error>
       </mat-form-field>
     </div>
@@ -22,7 +21,7 @@
         </mat-error>
       </mat-form-field>
     </div>
-    {{service.error}}
+<p *ngIf="service.error!= ' ' ">{{service.error}}</p>
 
     <button routerLink ='' (click)="service.Login(RData)" mat-raised-button color="primary" [disabled]="!Rform.valid">Connecter</button>
     <button routerLink="/Register" mat-raised-button color="primary" >Inscription</button>
