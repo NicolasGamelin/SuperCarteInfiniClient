@@ -37,6 +37,7 @@ Username: string[] = []
   async Register(user:RegisterDTO)
   {
     let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Account/Register',user))
+
   }
 
   async Login(user:LoginDTO)
@@ -47,14 +48,17 @@ Username: string[] = []
     console.log(r.error)
     this.Loginerr = r
 
-    this.route.navigate(['/cards']);
+   await this.route.navigate(['/']);
+    window.location.reload();
   }
 
   async Logout()
   {
 
-let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/Logout'))
+    let r = await  lastValueFrom(this.http.get<any>('https://localhost:7219/api/Account/Logout'))
     localStorage.removeItem(this.localStorageKey);
+    await this.route.navigate(['/Login']);
+    window.location.reload();
   }
 async Private()
   {

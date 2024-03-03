@@ -8,18 +8,20 @@ import {CardsComponent} from "./components/cards/cards.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {LoginComponent} from "./components/login/login.component";
 import {homeGuard} from "./home.guard";
+import {loginGuard} from "./login.guard";
 
 const routes: Routes = [
-  { path: 'match/:id', component: MatchComponent, canActivate:[homeGuard] },
+  { path: 'match/:id', component: MatchComponent,  },
+
+  { path: 'Register', component: RegisterComponent, canActivate:[loginGuard] },
+  { path: 'Login', component: LoginComponent, canActivate:[loginGuard] },
+  { path: '', component: HomeComponent,  children: [
       { path: 'cards', component: CardsComponent },
       { path: 'store', component: StoreComponent },
-  { path: 'Register', component: RegisterComponent },
-  { path: 'Login', component: LoginComponent },
-  { path: 'Home', component: HomeComponent, children: [
-
-
       { path: '**', redirectTo: 'cards'}
-  ]},
+
+  ], canActivate:[homeGuard] },
+      { path: '**', redirectTo: '/'}
 
 ];
 

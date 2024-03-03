@@ -26,7 +26,7 @@ export class AppComponent {
 
   async logout() {
     // TODO: Gérer le logout
-this.service.Logout()
+     await this.service.Logout()
   }
 
 }
