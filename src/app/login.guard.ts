@@ -4,7 +4,7 @@ import {ApiService} from "./services/api.service";
 
 export const loginGuard: CanActivateFn = (route, state) => {
   if(inject(ApiService).isLogged)
-    return createUrlTreeFromSnapshot(route, ['/cards']);
+    return createUrlTreeFromSnapshot(route, ['']);
 
   else
     return true;

@@ -10,10 +10,11 @@ import {RegisterDTO} from "../../models/RegisterDTO";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit{
-  Username: string[] = []
+
+
   ngOnInit(): void {
     this.service.GetAllUserName();
-    this.Username = this.service.Username;
+
   }
   Rform:FormGroup<any>;
   RData:RegisterDTO = (new RegisterDTO("","","",""))
@@ -51,24 +52,14 @@ if (Password.length < 12)
   control.get('Password')?.setErrors({minLength:true});
 }
 
-    return null
-  }
-
-  /*UsernameValidator(control: AbstractControl): ValidationErrors | null  {
-
-    const Username = control.get('Username')?.value;
-    for (let i = 0; i < this.Username.length ; i++) {
-      if (Username == this.Username[i] )
-      {
-        control.get('Username')?.setErrors({UsernameExist:true});
-      }
-    }
-
 
 
     return null
   }
-*/
+
+
+
+
 
 
 }
