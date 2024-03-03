@@ -7,13 +7,14 @@ import {StoreComponent} from "./components/store/store.component";
 import {CardsComponent} from "./components/cards/cards.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {LoginComponent} from "./components/login/login.component";
+import {homeGuard} from "./home.guard";
 
 const routes: Routes = [
-  { path: 'match/:id', component: MatchComponent },
+  { path: 'match/:id', component: MatchComponent, canActivate:[homeGuard] },
       { path: 'cards', component: CardsComponent },
       { path: 'store', component: StoreComponent },
   { path: 'Register', component: RegisterComponent },
-  { path: '', component: LoginComponent },
+  { path: 'Login', component: LoginComponent },
   { path: 'Home', component: HomeComponent, children: [
 
 

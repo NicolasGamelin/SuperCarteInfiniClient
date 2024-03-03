@@ -6,13 +6,21 @@ import { environment } from 'src/environments/environment';
 import {LoginDTO} from "../models/LoginDTO";
 import {RegisterDTO} from "../models/RegisterDTO";
 import {CookieService} from "ngx-cookie-service";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  constructor(public http: HttpClient,public cookie:CookieService) { }
+  constructor(public http: HttpClient,public cookie:CookieService,public route:Router) {
+    let userString = localStorage.getItem(this.localStorageKey);
+    if(userString != null){
+      this.Loginerr = userString;
+      this.isLogged = true;
+    }
+  }
+  isLogged:boolean = false;
   public localStorageKey = 'username';
 Loginerr: string = ""
 Username: string[] = []
@@ -28,8 +36,7 @@ Username: string[] = []
 
   async Register(user:RegisterDTO)
   {
-
-let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Account/Register',user))
+    let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Account/Register',user))
   }
 
   async Login(user:LoginDTO)
@@ -40,6 +47,7 @@ let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Acco
     console.log(r.error)
     this.Loginerr = r
 
+    this.route.navigate(['/cards']);
   }
 
   async Logout()
