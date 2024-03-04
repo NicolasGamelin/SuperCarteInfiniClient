@@ -113,6 +113,8 @@ export class MatchService {
     }
     this.playerData.maxhealth = this.playerData.health;
     this.adversaryData.maxhealth = this.adversaryData.health;
+
+    console.log(this.matchData)
   }
 
   async applyEvent(event:any){

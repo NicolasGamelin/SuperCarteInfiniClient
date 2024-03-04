@@ -77,62 +77,10 @@ export class MatchComponent implements OnInit {
   }
 
   async endTurn() {
-    // TODO Tâche Hub: Faire l'action sur le Hub
-    // Pour TEST
-    //let events = this.createDrawCardEventsForTest(this.matchService.adversaryData!, 1);
-    //events.push({
-    //  $type: "GainMana",
-    //  Mana: 3,
-    //  PlayerId: this.matchService.adversaryData?.playerId
-    //});
-
-    //let fakeStartTurnEvent = {
-    //  $type: "PlayerStartTurn",
-    //  PlayerId: this.matchService.adversaryData?.playerId,
-    //  Events: events
-    //}
-
-    //let fakeEndTurnEvent = {
-    //  $type: "PlayerEndTurn",
-    //  PlayerId: this.matchService.playerData?.playerId,
-    //  Events: [fakeStartTurnEvent]
-    //}
-    //await this.matchService.applyEvent(fakeEndTurnEvent);
-
-    // On attend 3 secondes pour faire semblant que l'autre joueur attend pour terminer son tour
-    //await new Promise(resolve => setTimeout(resolve, 3000));
-    //events = this.createDrawCardEventsForTest(this.matchService.playerData!, 1);
-    //events.push({
-    //  $type: "GainMana",
-    //  Mana: 3,
-    //  PlayerId: this.matchService.playerData?.playerId
-    //});
-
-    //fakeStartTurnEvent = {
-    //  $type: "PlayerStartTurn",
-    //  PlayerId: this.matchService.playerData?.playerId,
-    //  Events: events
-    //}
-
-    //fakeEndTurnEvent = {
-    //  $type: "PlayerEndTurn",
-    //  PlayerId: this.matchService.adversaryData?.playerId,
-    //  Events: [fakeStartTurnEvent]
-    //}
-    //await this.matchService.applyEvent(fakeEndTurnEvent);
-
-    console.log(this.matchData)
-    await this.hubService.EndTurn(this.matchData?.match.id!, localStorage.getItem('playerId')!)
+    await this.hubService.EndTurn(this.matchData?.match.id!, localStorage.getItem('username')!)
   }
 
   async surrender() {
-    // TODO Tâche Hub: Faire l'action sur le Hub
-    //let fakeEndMatchEvent = {
-    //  $type: "EndMatch",
-    //  WinningPlayerId: this.matchService.adversaryData?.playerId
-    //}
-    //this.matchService.applyEvent(fakeEndMatchEvent);
-
     await this.hubService.Surrender(this.matchData?.match.id!, localStorage.getItem('playerId')!)
   }
 

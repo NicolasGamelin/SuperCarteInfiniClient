@@ -2,6 +2,13 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+
+    {
+      "command": "ng serve --ssl true",
+      "name": "ng serve ssl",
+      "request": "launch",
+      "type": "node-terminal"
+    },
     {
       "name": "Launch Chrome",
       "request": "launch",
