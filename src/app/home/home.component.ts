@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
 
     this.hubService.hubConnection.on('redirectToMatch', (data: any) => {
       this.router.navigateByUrl('/match/'+data)
-      console.log(data);
     })
   }
 }

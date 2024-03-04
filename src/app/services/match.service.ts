@@ -114,7 +114,7 @@ export class MatchService {
     this.playerData.maxhealth = this.playerData.health;
     this.adversaryData.maxhealth = this.adversaryData.health;
 
-    console.log(this.matchData)
+    console.log(this.matchData);
   }
 
   async applyEvent(event:any){
@@ -129,11 +129,9 @@ export class MatchService {
         // TODO
         let playerData = this.getPlayerData(event.PlayerId);
 
-          playerData!.mana += event.Mana;
+        console.log("\nMana : "+event.Mana)
 
-        // if(playerData?.playerId == this.playerData?.playerId)
-        // if(playerData?.playerId == this.adversaryData?.playerId)
-        //   this.adversaryData!.mana += event.Mana;
+        playerData!.mana += event.Mana;
 
         break;
       }

@@ -26,10 +26,16 @@ export class hubService {
             console.log('La connexion est active!');
 
             this.hubConnection.on('matchData', (data: MatchData) => {
-                this.matchService.playMatch(data, parseInt(localStorage.getItem('playerId')!))
+                if (data.playerA.name == localStorage.getItem('username')!){
+                    this.matchService.playMatch(data, data.playerA.id)
+                }
+                else{
+                    this.matchService.playMatch(data, data.playerB.id)
+                }
             })
 
             this.hubConnection.on("event", (data: any) => {
+                console.log("Event :\n"+data)
                 this.matchService.applyEvent(JSON.parse(data));
             })
           })
@@ -57,7 +63,7 @@ export class hubService {
         this.hubConnection.invoke('EndTurn', matchId.toString(), userId.toString())
     }
 
-    async Surrender(matchId: number, userId: string){
+    async Surrender(matchId: number, userId: number){
         if (this.hubConnection.state == "Disconnected"){
             await this.connectToHub()
         }

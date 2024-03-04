@@ -34,28 +34,28 @@ export class MatchComponent implements OnInit {
     this.matchData.playerB.name = match.playerDataB.player.name
   }
 
-  async initTest() {
-    // Pendant les tests, on est le joueur B
-    let cards = await this.apiService.getPlayersCards();
-    let matchData = this.matchService.playTestMatch(cards);
-    console.log(cards.length);
-    let nbCardsToDraw = 3;
-    let drawCardEvents = this.createDrawCardEventsForTest(matchData.match.playerDataA, nbCardsToDraw);
-    drawCardEvents = drawCardEvents.concat(this.createDrawCardEventsForTest(matchData.match.playerDataB, nbCardsToDraw + 1));
-    drawCardEvents.push(
-      {
-        $type: "GainMana",
-        Mana: 3,
-        PlayerId: this.matchService.playerData?.playerId
-      }
-    );
-
-    let fakeStartMatchEvent = {
-      $type: "StartMatch",
-      Events: drawCardEvents
-    }
-    this.matchService.applyEvent(fakeStartMatchEvent);
-  }
+  //async initTest() {
+  //  // Pendant les tests, on est le joueur B
+  //  let cards = await this.apiService.getPlayersCards();
+  //  let matchData = this.matchService.playTestMatch(cards);
+  //  console.log(cards.length);
+  //  let nbCardsToDraw = 3;
+  //  let drawCardEvents = this.createDrawCardEventsForTest(matchData.match.playerDataA, nbCardsToDraw);
+  //  drawCardEvents = drawCardEvents.concat(this.createDrawCardEventsForTest(matchData.match.playerDataB, nbCardsToDraw + 1));
+  //  drawCardEvents.push(
+  //    {
+  //      $type: "GainMana",
+  //      Mana: 3,
+  //      PlayerId: this.matchService.playerData?.playerId
+  //    }
+  //  );
+//
+  //  let fakeStartMatchEvent = {
+  //    $type: "StartMatch",
+  //    Events: drawCardEvents
+  //  }
+  //  this.matchService.applyEvent(fakeStartMatchEvent);
+  //}
 
   createDrawCardEventsForTest(playerData:PlayerData, nbCards:number) : any[]{
     let drawCardEvents:any[] = [];
@@ -81,7 +81,12 @@ export class MatchComponent implements OnInit {
   }
 
   async surrender() {
-    await this.hubService.Surrender(this.matchData?.match.id!, localStorage.getItem('playerId')!)
+    if (this.matchData!.playerA.name == localStorage.getItem('username')!){
+      await this.hubService.Surrender(this.matchData?.match.id!, this.matchData!.match.playerDataA.playerId)
+    }
+    else{
+      await this.hubService.Surrender(this.matchData?.match.id!, this.matchData!.match.playerDataB.playerId)
+    }
   }
 
   isVictory() {
