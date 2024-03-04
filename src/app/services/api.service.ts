@@ -36,7 +36,7 @@ Username: string[] = []
       "Access-Control-Allow-Origin": "http://localhost:4200"
     };
 
-    const requestOptions = {                                                                                                                                                                                 
+    const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
 
@@ -48,6 +48,9 @@ Username: string[] = []
   {
     let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Account/Register',user))
     this.error = "";
+
+    let u = new LoginDTO(user.UserName,user.Password);
+     await this.Login(u);
   }
 
   async Login(user:LoginDTO)
