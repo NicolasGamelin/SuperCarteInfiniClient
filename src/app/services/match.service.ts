@@ -97,14 +97,19 @@ export class MatchService {
 
     if(this.match.playerDataA.playerId == this.currentPlayerId)
     {
+      console.log(this.match.playerDataA, "PlayerAData")
+      console.log(this.match.playerDataB, "PlayerBData")
       this.playerData = this.match.playerDataA!;
       this.playerData.playerName = matchData.playerA.name;
       this.adversaryData = this.match.playerDataB!;
       this.adversaryData.playerName = matchData.playerB.name;
       this.isCurrentPlayerTurn = this.match.isPlayerATurn;
+
     }
     else
     {
+      console.log(this.match.playerDataA, "PlayerAData")
+      console.log(this.match.playerDataB, "PlayerbData")
       this.playerData = this.match.playerDataB!;
       this.playerData.playerName = matchData.playerB.name;
       this.adversaryData = this.match.playerDataA!;
@@ -114,11 +119,12 @@ export class MatchService {
     this.playerData.maxhealth = this.playerData.health;
     this.adversaryData.maxhealth = this.adversaryData.health;
 
-    console.log(this.matchData);
+    // console.log(this.matchData);
   }
 
   async applyEvent(event:any){
-    console.log("ApplyingEvent: " + event.$type);
+    console.log("ApplyingEvent:");
+    console.log(event);
     switch(event.$type){
       case "StartMatch": {
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -129,9 +135,10 @@ export class MatchService {
         // TODO
         let playerData = this.getPlayerData(event.PlayerId);
 
-        console.log("\nMana : "+event.Mana)
-
-        playerData!.mana += event.Mana;
+        if(event.Mana != null){
+          playerData!.mana += event.Mana;
+          console.log(playerData)
+        }
 
         break;
       }
@@ -179,7 +186,7 @@ export class MatchService {
 
   moveCard(src:PlayableCard[], dst:PlayableCard[], playableCardId:any){
     let playableCard = src.find(c => c.id == playableCardId);
-    console.log(playableCard);
+    // console.log(playableCard);
     if(playableCard != undefined){
       let index = src.findIndex(c => c.id == playableCardId);
       src.splice(index, 1);

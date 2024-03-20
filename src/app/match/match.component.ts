@@ -32,6 +32,7 @@ export class MatchComponent implements OnInit {
     this.matchData.playerB = <Player>{}
     this.matchData.playerB.id = this.matchData.match.playerDataB.id
     this.matchData.playerB.name = match.playerDataB.player.name
+    console.log(this.matchData, "MATCH DATA");
   }
 
   //async initTest() {

@@ -21,7 +21,7 @@ export class AppComponent {
 
   getUsername(){
 
-    return localStorage.getItem(this.service.localStorageKey);
+    return this.service.GetUserName();
   }
 
   async logout() {

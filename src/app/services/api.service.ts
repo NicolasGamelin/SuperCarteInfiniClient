@@ -9,26 +9,34 @@ import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
 import {ERROR} from "@angular/compiler-cli/src/ngtsc/logging/src/console_logger";
 
+const LOCAL_STORAGE_KEY = 'username';
+const LOCAL_STORAGE_PLAYERID_KEY = 'playerId';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
   constructor(public http: HttpClient,public cookie:CookieService,public route:Router) {
-    let userString = localStorage.getItem(this.localStorageKey);
+    let userString = localStorage.getItem(LOCAL_STORAGE_KEY);
     if(userString != null){
       this.Loginerr = userString;
       this.isLogged = true;
     }
   }
   isLogged:boolean = false;
-  public localStorageKey = 'username';
+
   error:string = "";
 Loginerr: string = ""
 Username: string[] = []
   async getAllCards(): Promise<Card[]> {
     let result = await lastValueFrom(this.http.get<Card[]>(environment.apiUrl+'api/card/GetAllCards'));
     return result;
+  }
+
+
+  GetUserName(){
+  return localStorage.getItem(LOCAL_STORAGE_KEY);
   }
 
   async getPlayersCards(): Promise<Card[]> {
@@ -58,7 +66,7 @@ Username: string[] = []
 
     try {
       let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Account/Login',user))
-      localStorage.setItem(this.localStorageKey, r.userName);
+      localStorage.setItem(LOCAL_STORAGE_KEY, r.userName);
       console.log(r.userName)
       this.error = "";
       await this.route.navigate(['/']);
@@ -79,7 +87,7 @@ this.error = error.error.error;
 
 this.error = "";
 
-    localStorage.removeItem(this.localStorageKey);
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
     await this.route.navigate(['/Login']);
     window.location.reload();
   }
