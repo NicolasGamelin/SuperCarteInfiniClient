@@ -24,7 +24,7 @@
 <p *ngIf="service.error!= ' ' ">{{service.error}}</p>
 
     <button routerLink ='' (click)="service.Login(RData)" mat-raised-button color="primary" [disabled]="!Rform.valid">Connecter</button>
-    <button routerLink="/Register" mat-raised-button color="primary" >Inscription</button>
+    <button style="margin-left: 1em" routerLink="/Register" mat-raised-button color="primary" >Aller vers Inscription</button>
   </form>
 </mat-card>
 

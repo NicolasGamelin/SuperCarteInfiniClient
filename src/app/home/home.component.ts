@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { MatchService } from '../services/match.service';
+import { hubService } from '../services/hub.service';
 import {delay} from "rxjs";
 
 @Component({
@@ -10,13 +11,12 @@ import {delay} from "rxjs";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public router: Router, public match: MatchService) { }
+  constructor(public router: Router, public match: MatchService, public hubService: hubService) { }
 
   searching:boolean = false;
   searchingIndex:number = -1;
-  ngOnInit() {
+  ngOnInit() { this.hubService.connectToHub()}
 
-  }
    delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
@@ -25,14 +25,10 @@ export class HomeComponent implements OnInit {
     this.searching = true;
     this.searchingIndex++;
     let i = this.searchingIndex;
-    await this.delay(30000);
-    //prob pas tres bon
-    if(this.searching && i == this.searchingIndex){
-      let matchId = -1;
-     await this.router.navigate(['/match/' + matchId]);
-      this.searching = false;
-    }
+    await this.hubService.joinMatch(localStorage.getItem("username")! , null)
+
+    this.hubService.hubConnection.on('redirectToMatch', (data: any) => {
+      this.router.navigateByUrl('/match/'+data)
+    })
   }
 }
-
-

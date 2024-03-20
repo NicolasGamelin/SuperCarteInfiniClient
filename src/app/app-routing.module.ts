@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent,  children: [
       { path: 'cards', component: CardsComponent },
       { path: 'store', component: StoreComponent },
-
+      { path: '**', redirectTo: 'cards'}
 
   ], canActivate:[homeGuard] },
       { path: '**', redirectTo: '/'}
