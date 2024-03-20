@@ -6,6 +6,7 @@ export interface Player {
 export interface Card {
     id: number;
     name: string;
+    health: number;
     attack: number;
     defense: number;
     cost: number;
@@ -35,7 +36,7 @@ export interface PlayableCard {
 
 export interface PlayerData {
     id:number;
-	  health: number;
+	health: number;
     maxhealth: number;
     mana: number;
     playerId: number;

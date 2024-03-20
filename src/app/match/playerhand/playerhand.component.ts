@@ -13,6 +13,7 @@ export class PlayerhandComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.cards)
   }
 
   click(playableCardId:any){

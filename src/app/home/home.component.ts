@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { MatchService } from '../services/match.service';
+import { hubService } from '../services/hub.service';
+import {delay} from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -9,18 +11,24 @@ import { MatchService } from '../services/match.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public router: Router, public match: MatchService) { }
+  constructor(public router: Router, public match: MatchService, public hubService: hubService) { }
 
-  ngOnInit() {
+  searching:boolean = false;
+  searchingIndex:number = -1;
+  ngOnInit() { this.hubService.connectToHub()}
 
+   delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
+  async joinMatch() {
 
-  joinMatch() {
-    // TODO: Anuglar: Afficher un dialogue qui montre que l'on attend de joindre un match
-    // TODO: Hub: Se connecter au Hub et joindre un match
-    let matchId = -1;
-    this.router.navigate(['/match/' + matchId]);
+    this.searching = true;
+    this.searchingIndex++;
+    let i = this.searchingIndex;
+    await this.hubService.joinMatch(localStorage.getItem("username")! , null)
+
+    this.hubService.hubConnection.on('redirectToMatch', (data: any) => {
+      this.router.navigateByUrl('/match/'+data)
+    })
   }
 }
-
-
