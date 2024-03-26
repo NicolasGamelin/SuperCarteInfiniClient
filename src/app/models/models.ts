@@ -1,6 +1,7 @@
 export interface Player {
     id: number;
     name: string;
+    money:number;
 }
 
 export interface Card {
@@ -8,9 +9,9 @@ export interface Card {
     name: string;
     health: number;
     attack: number;
-    defense: number;
     cost: number;
     imageUrl: string;
+    cardPowers:CardPower[];
 }
 
 export interface MatchData {
@@ -45,4 +46,61 @@ export interface PlayerData {
     hand: PlayableCard[];
     battleField: PlayableCard[];
     graveyard: PlayableCard[];
+}
+
+export interface Deck {
+    id:number;
+    name:string;
+    playerId:number;
+    player:Player
+}
+
+export interface DeckCard {
+    id:number;
+    cardId:number;
+    deckId:number;
+    card:Card;
+    deck:Deck;
+}
+
+export interface Paquet {
+    id:number;
+    type:string;
+    cout:number;
+    uRLImage:string;
+    nombreCarte:number;
+}
+
+export interface Power {
+    FIRST_STRIKE_ID: 1;
+    THORNS_ID: 2;
+    HEAL_ID: 3;
+
+    id:number;
+    name:string;
+    description:string;
+    icon:string;
+}
+
+export interface Rarity {
+    id:number;
+    name:string;
+    couleur:string;
+}
+
+export interface CardPower {
+    id:number;
+    value:number;
+    card:Card;
+    power:Power;
+}
+
+export interface PaquetRarity {
+    id:number;
+    rarityId:number;
+    paquetId:number;
+    odds:number;
+    minimum:number;
+    rarity:Rarity;
+    paquet:Paquet;
 }
