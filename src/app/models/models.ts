@@ -9,6 +9,7 @@ export interface Card {
     name: string;
     health: number;
     attack: number;
+    defense: number;
     cost: number;
     imageUrl: string;
     cardPowers:CardPower[];
