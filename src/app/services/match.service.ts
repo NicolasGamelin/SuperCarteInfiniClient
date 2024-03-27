@@ -61,11 +61,13 @@ export class MatchService {
       },
       playerA: {
         id: 1,
-        name: "Adversaire"
+        name: "Adversaire",
+        money: 0
       },
       playerB: {
         id: 2,
-        name: "Joueur"
+        name: "Joueur",
+        money: 0
       },
       winningPlayerId: -1
     }
