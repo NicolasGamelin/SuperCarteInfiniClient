@@ -1,6 +1,6 @@
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { Card } from '../models/models';
 import { environment } from 'src/environments/environment';
 import {LoginDTO} from "../models/LoginDTO";
@@ -107,5 +107,17 @@ async Private()
       this.Username.push(r[i])
     }
 
+  }
+
+  getMoney():Observable<number>{
+    return this.http.get<any>('https://localhost:7219/api/Account/getMoney');
+  }
+
+  getMoneyForWin(): Observable<number>{
+    return this.http.get<any>('https://localhost:7219/api/Account/getMoneyForWin');
+  }
+
+  getMoneyForLose(): Observable<number>{
+    return this.http.get<any>('https://localhost:7219/api/Account/getMoneyForLose');
   }
 }

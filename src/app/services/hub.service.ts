@@ -26,9 +26,6 @@ export class hubService {
             console.log('La connexion est active!');
 
             this.hubConnection.on('matchData', (data: MatchData) => {
-              console.log("test!");
-              console.log(data.playerA.name);
-              console.log(localStorage.getItem('username'));
                 if (data.playerA.name == localStorage.getItem('username')!){
                     this.matchService.playMatch(data, data.playerA.id)
                 }

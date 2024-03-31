@@ -24,7 +24,6 @@ export class CardComponent implements OnInit {
 
   async ngOnInit() {
     this.cards = await this.api.getPlayersCards();
-    console.log(this.cards);
   }
 
 

@@ -4,6 +4,7 @@ import { MatchService } from './../services/match.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { hubService } from '../services/hub.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-match',
@@ -13,6 +14,9 @@ import { hubService } from '../services/hub.service';
 export class MatchComponent implements OnInit {
 
   matchData:MatchData|null = null;
+
+  public moneyForWin: Observable<number> = this.getMoneyForWin();
+  public moneyForLose: Observable<number> = this.getMoneyForLose();
 
   constructor(private route: ActivatedRoute, public router: Router, public matchService:MatchService, public apiService:ApiService, public hubService: hubService) { }
 
@@ -32,7 +36,6 @@ export class MatchComponent implements OnInit {
     this.matchData.playerB = <Player>{}
     this.matchData.playerB.id = this.matchData.match.playerDataB.id
     this.matchData.playerB.name = match.playerDataB.player.name
-    console.log(this.matchData, "MATCH DATA");
   }
 
   //async initTest() {
@@ -94,5 +97,13 @@ export class MatchComponent implements OnInit {
     if(this.matchService.matchData?.winningPlayerId)
       return this.matchService.matchData!.winningPlayerId === this.matchService.playerData!.playerId
     return false;
+  }
+
+  getMoneyForWin(): Observable<number>{
+    return this.apiService.getMoneyForWin();
+  }
+
+  getMoneyForLose(): Observable<number>{
+    return this.apiService.getMoneyForLose();
   }
 }
