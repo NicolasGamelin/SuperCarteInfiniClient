@@ -13,6 +13,8 @@ export interface Card {
     cost: number;
     imageUrl: string;
     cardPowers:CardPower[];
+    rarityId: number;
+    rarity: Rarity;
 }
 
 export interface MatchData {
