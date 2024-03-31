@@ -88,7 +88,7 @@ export interface Power {
 export interface Rarity {
     id:number;
     name:string;
-    couleur:string;
+    couleur:number;
 }
 
 export interface CardPower {

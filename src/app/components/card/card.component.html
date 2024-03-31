@@ -1,5 +1,5 @@
 <mat-card *ngIf="show=='front'" class="infinite-card">
-  <mat-card-header>
+  <mat-card-header [style.background-color]="'#'+card?.rarity?.couleur?.toString(16)">
     <div mat-card-avatar class="infinite-card-mana-cost">
       {{card?.cost}} <i class="fas fa-gem"></i>
     </div>
