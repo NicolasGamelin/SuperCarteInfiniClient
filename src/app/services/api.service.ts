@@ -1,7 +1,7 @@
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom, Observable } from 'rxjs';
-import { Card } from '../models/models';
+import { Card, Paquet } from '../models/models';
 import { environment } from 'src/environments/environment';
 import {LoginDTO} from "../models/LoginDTO";
 import {RegisterDTO} from "../models/RegisterDTO";
@@ -119,5 +119,16 @@ async Private()
 
   getMoneyForLose(): Observable<number>{
     return this.http.get<any>('https://localhost:7219/api/Account/getMoneyForLose');
+  }
+
+  async getAllPaquets(){
+    let result = await lastValueFrom(this.http.get<Paquet[]>(environment.apiUrl+'api/card/GetAllPaquets'));
+    return result;
+  }
+
+  async buyPaquet(id: number){
+    let result = await lastValueFrom(this.http.get<Paquet[]>(environment.apiUrl+'api/card/buyPaquet?id='+id));
+    console.log(result);
+    return result;
   }
 }

@@ -21,6 +21,7 @@ import {CookieService} from "ngx-cookie-service";
 import {InterceptorinterceptorInterceptor} from "./interceptorinterceptor.interceptor";
 import {StoreComponent} from "./components/store/store.component";
 import {CardsComponent} from "./components/cards/cards.component";
+import { PaquetComponent } from './components/paquet/paquet.component';
 
 
 
@@ -37,7 +38,8 @@ import {CardsComponent} from "./components/cards/cards.component";
     RegisterComponent,
     LoginComponent,
     StoreComponent,
-    CardsComponent
+    CardsComponent,
+    PaquetComponent
    ],
   imports: [
     BrowserModule,
