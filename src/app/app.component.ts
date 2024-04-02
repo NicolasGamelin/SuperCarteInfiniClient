@@ -14,7 +14,21 @@ export class AppComponent {
 
   public money:Observable<number> = this.getMoney();
 
-  constructor(public router: Router, public matchService:MatchService,public service:ApiService) { }
+  constructor(public router: Router, public matchService:MatchService,public service:ApiService) { 
+    service.emitChangeSource.subscribe({
+      next: (v) => {
+        console.log(v);
+        this.money = this.money;
+        this.money = this.getMoney();
+      },
+      error: function (err: any): void {
+        console.log(err);
+      },
+      complete: function (): void {
+        
+      }
+    });
+  }
 
   isLogged(){
     // TODO: Gérer l'affichage du joueur lorsqu'il est connecté

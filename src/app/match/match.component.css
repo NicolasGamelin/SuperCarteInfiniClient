@@ -37,3 +37,16 @@
 	bottom: 40px;
 	right: 0;
 }
+
+.coinIcon{
+    height: 100px;
+    width: 100px;
+}
+
+.spanMoney{
+    height: 125px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { Paquet } from 'src/app/models/models';
 import { ApiService } from 'src/app/services/api.service';
@@ -16,8 +16,9 @@ export class PaquetComponent {
   async buy(){
     let money = await this.getMoney();
     if( money >= this.paquet!.cout){
-      this.service.buyPaquet(this.paquet!.id);
+      await this.service.buyPaquet(this.paquet!.id);
     }
+    this.service.emitChange("money");
   }
 
   async getMoney(): Promise<number>{

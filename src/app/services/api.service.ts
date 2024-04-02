@@ -8,6 +8,7 @@ import {RegisterDTO} from "../models/RegisterDTO";
 import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
 import {ERROR} from "@angular/compiler-cli/src/ngtsc/logging/src/console_logger";
+import { Subject } from '@microsoft/signalr';
 
 const LOCAL_STORAGE_KEY = 'username';
 const LOCAL_STORAGE_PLAYERID_KEY = 'playerId';
@@ -16,6 +17,12 @@ const LOCAL_STORAGE_PLAYERID_KEY = 'playerId';
   providedIn: 'root'
 })
 export class ApiService {
+
+  public emitChangeSource = new Subject<any>();
+
+  emitChange(change: any){
+    this.emitChangeSource.next(change);
+  }
 
   constructor(public http: HttpClient,public cookie:CookieService,public route:Router) {
     let userString = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -33,7 +40,6 @@ Username: string[] = []
     let result = await lastValueFrom(this.http.get<Card[]>(environment.apiUrl+'api/card/GetAllCards'));
     return result;
   }
-
 
   GetUserName(){
   return localStorage.getItem(LOCAL_STORAGE_KEY);

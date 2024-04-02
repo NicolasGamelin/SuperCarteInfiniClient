@@ -16,13 +16,13 @@
 </div>
 <div *ngIf="matchService.matchData != null && matchService.matchData.winningPlayerId == matchService.adversaryData!.playerId" class="end endtext">
   <span>Défaite 😩</span>
-  <span>{{moneyForLose | async }}</span>
+  <span class="spanMoney">+{{moneyForLose | async }} <img class="coinIcon" src="/assets/coin2.png" alt="coin"></span>
   <button (click)="endMatch()" mat-raised-button color="accent">Quitter la partie</button>
 </div>
 <div *ngIf="matchService.matchData != null && matchService.matchData.winningPlayerId == matchService.playerData!.playerId" class="end endtext">
   <span>Votre adversaire à abandonner</span>
   <span>Victoire 🥳 🐈</span>
-  <span>{{moneyForWin | async }}</span>
+  <span class="spanMoney">+{{moneyForWin | async }} <img class="coinIcon" src="/assets/coin2.png" alt="coin"></span>
   <button (click)="endMatch()" mat-raised-button color="accent">Quitter la partie</button>
 </div>
 <div *ngIf="matchService.playerData">
