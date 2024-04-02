@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { Paquet } from 'src/app/models/models';
 import { ApiService } from 'src/app/services/api.service';

@@ -8,7 +8,7 @@
   </mat-chip>
   <div id="moneydiv">
     <p id="money">{{ money | async }}</p>
-    <img id="coinIcon" src="/assets/coin2.png" alt="coin">
+    <img class="coinIcon" src="/assets/coin2.png" alt="coin">
   </div>
   <button mat-raised-button color="warn" *ngIf="isLogged()" (click)="logout()">Se déconnecter</button>
   <button mat-raised-button color="accent"  (click)="service.Private()">Test</button>

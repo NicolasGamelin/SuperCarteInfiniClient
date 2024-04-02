@@ -70,7 +70,7 @@ export interface Paquet {
     id:number;
     type:string;
     cout:number;
-    uRLImage:string;
+    urlImage:string;
     nombreCarte:number;
 }
 

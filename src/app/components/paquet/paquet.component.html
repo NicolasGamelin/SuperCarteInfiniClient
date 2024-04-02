@@ -1,3 +1,7 @@
-<div (click)="buy()">
-    <p>{{paquet?.type}}</p>
+<div (click)="buy()" class="paquet" style="background-image: url({{paquet?.urlImage}});">
+    <p class="paquetTitle">{{paquet?.type}}</p>
+    <div class="paquetPrix">
+        <p class="paquetPrixTexte">{{paquet?.cout}}</p>
+        <img class="coinIcon" src="/assets/coin2.png" alt="coin">
+    </div>
 </div>
