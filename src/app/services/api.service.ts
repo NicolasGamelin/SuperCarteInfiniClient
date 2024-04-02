@@ -7,7 +7,6 @@ import {LoginDTO} from "../models/LoginDTO";
 import {RegisterDTO} from "../models/RegisterDTO";
 import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
-import {ERROR} from "@angular/compiler-cli/src/ngtsc/logging/src/console_logger";
 import { Subject } from '@microsoft/signalr';
 
 const LOCAL_STORAGE_KEY = 'username';
@@ -132,8 +131,8 @@ async Private()
     return result;
   }
 
-  async buyPaquet(id: number){
-    let result = await lastValueFrom(this.http.get<Paquet[]>(environment.apiUrl+'api/card/buyPaquet?id='+id));
+  async buyPaquet(id: number): Promise<Card[]>{
+    let result = await lastValueFrom(this.http.get<Card[]>(environment.apiUrl+'api/card/buyPaquet?id='+id));
     console.log(result);
     return result;
   }
