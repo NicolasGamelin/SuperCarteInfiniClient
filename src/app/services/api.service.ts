@@ -8,7 +8,7 @@ import {RegisterDTO} from "../models/RegisterDTO";
 import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
 import {ERROR} from "@angular/compiler-cli/src/ngtsc/logging/src/console_logger";
-import {deckname} from "../models/Deckname";
+import {Deckname} from "../models/Deckname";
 
 const LOCAL_STORAGE_KEY = 'username';
 const LOCAL_STORAGE_PLAYERID_KEY = 'playerId';
@@ -122,7 +122,7 @@ async getAllDecks(){
 
 
 
-  async createDeck(name:deckname):Promise<Deck | null>{
+  async createDeck(name:Deckname):Promise<Deck | null>{
 
   try {
 

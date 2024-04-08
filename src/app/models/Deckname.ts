@@ -1,4 +1,4 @@
-export class deckname
+export class Deckname
 {
   constructor(
     public name:string

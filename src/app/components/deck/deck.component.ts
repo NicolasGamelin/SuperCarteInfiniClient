@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../services/api.service";
 import {Deck} from "../../models/models";
-import {deckname} from "../../models/Deckname";
+import {Deckname} from "../../models/Deckname";
 
 @Component({
   selector: 'app-deck',
@@ -12,7 +12,7 @@ export class DeckComponent implements OnInit{
 
   decklist:Deck[] = [];
   name:string = "";
-  deckname:deckname = new deckname("");
+  deckname:Deckname = new Deckname("");
   constructor(public service:ApiService) {
   }
 
@@ -24,7 +24,7 @@ export class DeckComponent implements OnInit{
     this.deckname.name = name;
     let deck:Deck | null;
     console.log(name);
-    deck = await this.service.createDeck(deckname );
+    deck = await this.service.createDeck(this.deckname );
     if(deck != null)
     this.decklist.push(deck);
   }
