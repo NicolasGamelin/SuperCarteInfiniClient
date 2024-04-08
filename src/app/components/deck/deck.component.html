@@ -4,3 +4,16 @@
 </form>
 
 
+<form>
+  <mat-form-field>
+
+
+  <mat-label>Decks</mat-label>
+  <mat-select  [(ngModel)]="selectedDeck" name="selectedDeck" *ngFor="let deck of decklist">
+
+    <mat-option value="{{deck.id}}">{{ deck.name }}</mat-option>
+
+  </mat-select>
+  </mat-form-field>
+</form>
+

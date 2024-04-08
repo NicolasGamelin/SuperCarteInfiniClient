@@ -22,6 +22,9 @@ import {InterceptorinterceptorInterceptor} from "./interceptorinterceptor.interc
 import {StoreComponent} from "./components/store/store.component";
 import {CardsComponent} from "./components/cards/cards.component";
 import {DeckComponent} from "./components/deck/deck.component";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 
 
@@ -50,6 +53,9 @@ import {DeckComponent} from "./components/deck/deck.component";
     CanvasJSAngularChartsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
 
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: InterceptorinterceptorInterceptor, multi: true },CookieService],

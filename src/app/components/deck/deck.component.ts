@@ -10,6 +10,7 @@ import {Deckname} from "../../models/Deckname";
 })
 export class DeckComponent implements OnInit{
 
+  selectedDeck:number = 1;
   decklist:Deck[] = [];
   name:string = "";
   deckname:Deckname = new Deckname("");

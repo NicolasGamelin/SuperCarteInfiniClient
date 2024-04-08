@@ -125,11 +125,9 @@ async getAllDecks(){
   async createDeck(name:Deckname):Promise<Deck | null>{
 
   try {
-
-
-  let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Deck/CreateDeck', name));
-  console.log(r);
-  return r;
+    let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Deck/CreateDeck', name));
+    console.log(r);
+    return r;
   }
   catch (e) {
     const error = e as HttpErrorResponse
