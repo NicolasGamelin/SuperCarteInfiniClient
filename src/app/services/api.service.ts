@@ -1,7 +1,7 @@
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { Card } from '../models/models';
+import {Card, Deck} from '../models/models';
 import { environment } from 'src/environments/environment';
 import {LoginDTO} from "../models/LoginDTO";
 import {RegisterDTO} from "../models/RegisterDTO";
@@ -108,4 +108,42 @@ async Private()
     }
 
   }
+
+
+
+
+
+async getAllDecks(){
+  let r:Deck[] = await lastValueFrom(this.http.get<Deck[]>('https://localhost:7219/api/Deck/GetDecks'));
+  console.log(r);
+  return r;
+}
+
+
+
+  async createDeck(name:string):Promise<Deck | null>{
+
+  try {
+
+  let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Deck/CreateDeck', name));
+  console.log(r);
+  return r;
+  }
+  catch (e) {
+    const error = e as HttpErrorResponse
+    console.log(error.error.error);
+    this.error = error.error.error;
+  }
+  return null
+}
+
+
+
+
+
+
+
+
+
+
 }
