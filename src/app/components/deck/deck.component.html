@@ -3,17 +3,24 @@
   <button mat-raised-button (click)="createDeck(name)" color="primary" style="margin-right: 20px;"  >Créer un deck</button>
 </form>
 
+<br>
+<br>
+<br>
 
-<form>
-  <mat-form-field>
-
-
+<mat-form-field>
   <mat-label>Decks</mat-label>
-  <mat-select  [(ngModel)]="selectedDeck" name="selectedDeck" *ngFor="let deck of decklist">
-
-    <mat-option value="{{deck.id}}">{{ deck.name }}</mat-option>
-
+  <mat-select [(ngModel)]="selectedDeckID" (ngModelChange)="selectDeck()" name="selectedDeck" >
+      <mat-option *ngFor="let deck of decklist" value="{{deck.id}}">{{ deck.name }}</mat-option>
   </mat-select>
-  </mat-form-field>
+</mat-form-field>
+
+ <!-- <app-card  *ngFor="let card of selectedDeck." [health]="card.health" [card]="card" [id]="card.id" class="card fadeIn"></app-card> -->
+{{selectedDeckID}}
+
+
+<form ngForm >
+  <button mat-raised-button (click)="deleteDeck()" color="primary" style="margin-right: 20px;"  >SUPPRIMER</button>
 </form>
+
+
 

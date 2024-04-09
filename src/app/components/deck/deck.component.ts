@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../services/api.service";
 import {Deck} from "../../models/models";
 import {Deckname} from "../../models/Deckname";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-deck',
@@ -10,10 +12,12 @@ import {Deckname} from "../../models/Deckname";
 })
 export class DeckComponent implements OnInit{
 
-  selectedDeck:number = 1;
+  selectedDeckID:number = 0;
   decklist:Deck[] = [];
   name:string = "";
   deckname:Deckname = new Deckname("");
+  selectedDeck:Deck | undefined;
+
   constructor(public service:ApiService) {
   }
 
@@ -28,6 +32,22 @@ export class DeckComponent implements OnInit{
     deck = await this.service.createDeck(this.deckname );
     if(deck != null)
     this.decklist.push(deck);
+  }
+
+  async deleteDeck(){
+    let ID:number = this.selectedDeckID;
+    await this.service.deleteDeck(ID );
+    await this.service.getAllDecks();
+  }
+
+
+  async selectDeck(){
+      let decks:Deck[] = this.decklist;
+    for (let i:number = 0; i < decks.length;i++ ) {
+      if(decks.at(i)?.id == this.selectedDeckID){
+        this.selectedDeck = decks.at(i)!;
+      }
+    }
   }
 
 }

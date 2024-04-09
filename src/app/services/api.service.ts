@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 import {ERROR} from "@angular/compiler-cli/src/ngtsc/logging/src/console_logger";
 import {Deckname} from "../models/Deckname";
 
+
 const LOCAL_STORAGE_KEY = 'username';
 const LOCAL_STORAGE_PLAYERID_KEY = 'playerId';
 
@@ -135,6 +136,20 @@ async getAllDecks(){
     this.error = error.error.error;
   }
   return null
+}
+
+
+async deleteDeck(deckId:number){
+  try {
+    let r = await lastValueFrom(this.http.get<any>('https://localhost:7219/api/Deck/CreateDeck/'+deckId));
+    console.log(r);
+    return r;
+  }
+  catch (e) {
+    const error = e as HttpErrorResponse
+    console.log(error.error.error);
+    this.error = error.error.error;
+  }
 }
 
 
