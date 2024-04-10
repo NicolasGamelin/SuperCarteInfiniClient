@@ -14,12 +14,16 @@
   </mat-select>
 </mat-form-field>
 
- <!-- <app-card  *ngFor="let card of selectedDeck." [health]="card.health" [card]="card" [id]="card.id" class="card fadeIn"></app-card> -->
+
+<div *ngIf="selectedDeckID > 0">
+  <app-card *ngFor="let card of selectedDeck?.Cards" [health]="card.card.health" [card]="card.card" [id]="card.card.id" class="card fadeIn"></app-card>
+</div>
+
 {{selectedDeckID}}
 
 
 <form ngForm >
-  <button mat-raised-button (click)="deleteDeck()" color="primary" style="margin-right: 20px;"  >SUPPRIMER</button>
+  <button mat-raised-button (click)="deleteDeck()" color="primary" style="margin-right: 20px;"  >SUPPRIMER LE DECK</button>
 </form>
 
 

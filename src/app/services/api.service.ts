@@ -9,6 +9,7 @@ import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
 import {ERROR} from "@angular/compiler-cli/src/ngtsc/logging/src/console_logger";
 import {Deckname} from "../models/Deckname";
+import {EditCardDTO} from "../models/EditCardDTO";
 
 
 const LOCAL_STORAGE_KEY = 'username';
@@ -151,6 +152,35 @@ async deleteDeck(deckId:number){
     this.error = error.error.error;
   }
 }
+
+  async addCard(deckId:number, cardId:number){
+
+  let info:EditCardDTO = new EditCardDTO(deckId, cardId);
+    try {
+      let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Deck/AddCard/', info));
+      console.log(r);
+      return r;
+    }
+    catch (e) {
+      const error = e as HttpErrorResponse
+      console.log(error.error.error);
+      this.error = error.error.error;
+    }
+  }
+
+  async RemoveCard(deckId:number, cardId:number){
+    let info:EditCardDTO = new EditCardDTO(deckId, cardId);
+    try {
+      let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Deck/RemoveCard/', info));
+      console.log(r);
+      return r;
+    }
+    catch (e) {
+      const error = e as HttpErrorResponse
+      console.log(error.error.error);
+      this.error = error.error.error;
+    }
+  }
 
 
 

@@ -1,4 +1,4 @@
-export class AddCardDTO
+export class EditCardDTO
 {
   constructor(
     public DeckID:number,
