@@ -32,12 +32,14 @@ export class DeckComponent implements OnInit{
     deck = await this.service.createDeck(this.deckname );
     if(deck != null)
     this.decklist.push(deck);
+
   }
 
   async deleteDeck(){
     let ID:number = this.selectedDeckID;
     await this.service.deleteDeck(ID );
-    await this.service.getAllDecks();
+    this.selectedDeckID = 0;
+   this.decklist = await this.service.getAllDecks();
   }
 
 
@@ -48,6 +50,7 @@ export class DeckComponent implements OnInit{
         this.selectedDeck = decks.at(i)!;
       }
     }
+
   }
 
 }

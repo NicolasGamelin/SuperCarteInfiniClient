@@ -142,7 +142,7 @@ async getAllDecks(){
 
 async deleteDeck(deckId:number){
   try {
-    let r = await lastValueFrom(this.http.get<any>('https://localhost:7219/api/Deck/CreateDeck/'+deckId));
+    let r = await lastValueFrom(this.http.get<any>('https://localhost:7219/api/Deck/DeleteDeck/'+deckId));
     console.log(r);
     return r;
   }

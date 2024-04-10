@@ -56,7 +56,8 @@ export interface Deck {
     name:string;
     playerId:number;
     player:Player;
-    Cards:OwnedCard[];
+    cards:OwnedCard[];
+    isActive:boolean;
 }
 
 export interface DeckCard {
