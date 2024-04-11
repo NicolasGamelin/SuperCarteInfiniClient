@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../services/api.service";
-import {Deck} from "../../models/models";
+import {Card, Deck, OwnedCard} from "../../models/models";
 import {Deckname} from "../../models/Deckname";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,8 +12,11 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class DeckComponent implements OnInit{
 
+
+  cards:OwnedCard[] = [];
   isActive:boolean = false;
   selectedDeckID:number = 0;
+  selectedCardID:number = 0;
   decklist:Deck[] = [];
   name:string = "";
   deckname:Deckname = new Deckname("");
@@ -55,9 +58,21 @@ export class DeckComponent implements OnInit{
       if(decks.at(i)?.id == this.selectedDeckID){
         this.selectedDeck = decks.at(i)!;
         this.isActive = decks.at(i)!.isActive;
+        this.cards = await this.service.GetOwnedCards(this.selectedDeckID);
       }
     }
 
+  }
+
+  async addCard(){
+    let card:OwnedCard = await this.service.addCard(this.selectedDeckID,this.selectedCardID);
+    this.selectedCardID = 0;
+    this.selectedDeck?.cards.push(card);
+    for (let i:number = 0; i < this.cards.length;i++){
+      if (card.id == this.cards.at(i)!.id){
+        this.cards.splice(i,1);
+      }
+    }
   }
 
 }

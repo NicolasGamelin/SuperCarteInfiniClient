@@ -197,6 +197,19 @@ async deleteDeck(deckId:number){
     }
   }
 
+  async GetOwnedCards(deckId:number):Promise<any>{
+    try {
+      let r = await lastValueFrom(this.http.get<any>('https://localhost:7219/api/Deck/GetOwnedCards/' + deckId));
+      console.log(r);
+      return r;
+    }
+    catch (e) {
+      const error = e as HttpErrorResponse
+      console.log(error.error.error);
+      this.error = error.error.error;
+    }
+  }
+
 
 
 
