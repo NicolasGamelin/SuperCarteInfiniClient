@@ -182,6 +182,21 @@ async deleteDeck(deckId:number){
     }
   }
 
+  async SetDeckAsActive(deckId:number):Promise<void>{
+
+
+    try {
+      let r = await lastValueFrom(this.http.get<any>('https://localhost:7219/api/Deck/SetDeckAsActive/' + deckId));
+      console.log(r);
+      return r;
+    }
+    catch (e) {
+      const error = e as HttpErrorResponse
+      console.log(error.error.error);
+      this.error = error.error.error;
+    }
+  }
+
 
 
 

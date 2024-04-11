@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class DeckComponent implements OnInit{
 
+  isActive:boolean = false;
   selectedDeckID:number = 0;
   decklist:Deck[] = [];
   name:string = "";
@@ -42,12 +43,18 @@ export class DeckComponent implements OnInit{
    this.decklist = await this.service.getAllDecks();
   }
 
+  async setDeckAsActive(){
+    await this.service.SetDeckAsActive(this.selectedDeckID);
+    this.decklist = await this.service.getAllDecks();
+  }
+
 
   async selectDeck(){
       let decks:Deck[] = this.decklist;
     for (let i:number = 0; i < decks.length;i++ ) {
       if(decks.at(i)?.id == this.selectedDeckID){
         this.selectedDeck = decks.at(i)!;
+        this.isActive = decks.at(i)!.isActive;
       }
     }
 

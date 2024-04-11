@@ -16,6 +16,8 @@
 
   <button [disabled]="selectedDeck?.isActive!" mat-raised-button (click)="deleteDeck()" color="primary" style="margin-right: 20px; margin-left: 20px"  >SUPPRIMER LE DECK</button>
 
+  <input [(ngModel)]="isActive" (click)="setDeckAsActive()" [disabled]="selectedDeckID < 0" type="checkbox"> Current Deck
+
 
 <div class="card-list" *ngIf="selectedDeckID > 0">
   <app-card *ngFor="let card of selectedDeck?.cards" [health]="card.card.health" [card]="card.card" [id]="card.card.id" class="card fadeIn"></app-card>
