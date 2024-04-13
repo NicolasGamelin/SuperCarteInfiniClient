@@ -49,6 +49,7 @@ export class DeckComponent implements OnInit{
   async setDeckAsActive(){
     await this.service.SetDeckAsActive(this.selectedDeckID);
     this.decklist = await this.service.getAllDecks();
+    await this.selectDeck();
   }
 
 
@@ -71,6 +72,16 @@ export class DeckComponent implements OnInit{
     for (let i:number = 0; i < this.cards.length;i++){
       if (card.id == this.cards.at(i)!.id){
         this.cards.splice(i,1);
+      }
+    }
+  }
+
+  async removeCard(cardID:number){
+   let card:OwnedCard = await this.service.RemoveCard(this.selectedDeckID,cardID);
+   this.cards.push(card);
+    for (let i:number = 0; i < this.selectedDeck?.cards!.length!; i++){
+      if (card.id == this.selectedDeck?.cards.at(i)!.id){
+        this.selectedDeck?.cards.splice(i,1);
       }
     }
   }

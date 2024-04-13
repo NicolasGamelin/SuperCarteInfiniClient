@@ -25,14 +25,19 @@
   <div style="margin-left: 2em">
 
     <mat-form-field>
-      <mat-label>Mes cartes</mat-label>
+      <mat-label>Ajouter une carte</mat-label>
       <mat-select [(ngModel)]="selectedCardID" (ngModelChange)="addCard()" name="selectedCard" >
         <mat-option *ngFor="let card of cards" value="{{card.id}}">{{ card.card.name }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
     <div class="card-list">
-  <app-card *ngFor="let card of selectedDeck?.cards" [health]="card.card.health" [card]="card.card" [id]="card.card.id" class="card fadeIn"></app-card>
+      <div  *ngFor="let card of selectedDeck?.cards"style="display: flex">
+        <app-card  [health]="card.card.health" [card]="card.card" [id]="card.card.id" class="card fadeIn">
+
+        </app-card>
+          <button (click)="removeCard(card.id)" style="display:flex; position: relative;right: 55px;height: 4.2em;width: 4.2em">enlever la carte</button>
+      </div>
   </div>
 </div>
 
