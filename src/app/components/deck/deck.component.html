@@ -1,0 +1,50 @@
+<form ngForm >
+  <input [(ngModel)]="name" matInput placeholder="Nom du deck" name="deckname" >
+  <button mat-raised-button (click)="createDeck(name)" color="primary" style="margin-right: 20px;"  >Créer un deck</button>
+</form>
+
+<br>
+<br>
+<br>
+
+<mat-form-field>
+  <mat-label>Decks</mat-label>
+  <mat-select [(ngModel)]="selectedDeckID" (ngModelChange)="selectDeck()" name="selectedDeck" >
+      <mat-option *ngFor="let deck of decklist" value="{{deck.id}}">{{ deck.name }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+  <button [disabled]="selectedDeck?.isActive!" mat-raised-button (click)="deleteDeck()" color="primary" style="margin-right: 20px; margin-left: 20px"  >SUPPRIMER LE DECK</button>
+
+  <input [(ngModel)]="isActive" (click)="setDeckAsActive()" [disabled]="selectedDeckID < 0" type="checkbox"> Current Deck
+
+
+
+
+<div  *ngIf="selectedDeckID > 0">
+  <div style="margin-left: 2em">
+
+    <mat-form-field>
+      <mat-label>Ajouter une carte</mat-label>
+      <mat-select [(ngModel)]="selectedCardID" (ngModelChange)="addCard()" name="selectedCard" >
+        <mat-option *ngFor="let card of cards" value="{{card.id}}">{{ card.card.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+    <div class="card-list">
+      <div  *ngFor="let card of selectedDeck?.cards"style="display: flex">
+        <app-card  [health]="card.card.health" [card]="card.card" [id]="card.card.id" class="card fadeIn">
+
+        </app-card>
+          <button (click)="removeCard(card.id)" style="display:flex; position: relative;right: 55px;height: 4.2em;width: 4.2em">enlever la carte</button>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

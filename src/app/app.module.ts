@@ -22,6 +22,10 @@ import {InterceptorinterceptorInterceptor} from "./interceptorinterceptor.interc
 import {StoreComponent} from "./components/store/store.component";
 import {CardsComponent} from "./components/cards/cards.component";
 import { PaquetComponent } from './components/paquet/paquet.component';
+import {DeckComponent} from "./components/deck/deck.component";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 
 
@@ -39,7 +43,9 @@ import { PaquetComponent } from './components/paquet/paquet.component';
     LoginComponent,
     StoreComponent,
     CardsComponent,
-    PaquetComponent
+    PaquetComponent,
+    CardsComponent,
+    DeckComponent
    ],
   imports: [
     BrowserModule,
@@ -50,6 +56,9 @@ import { PaquetComponent } from './components/paquet/paquet.component';
     CanvasJSAngularChartsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
 
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: InterceptorinterceptorInterceptor, multi: true },CookieService],
