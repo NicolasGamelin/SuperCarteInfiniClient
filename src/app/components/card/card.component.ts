@@ -12,15 +12,15 @@ import {ApiService} from "../../services/api.service";
 })
 export class CardComponent implements OnInit {
 
-  cards:Card[] = [];
-  cardPowerr:CardPower[] =[];
-
-  @Input() card?:Card;
-  @Input() show:string = "front";
-  @Input() health:number = 0;
+  cards: Card[] = [];
+  cardPowerr: CardPower[] = [];
+  bounce = false;
+  @Input() card?: Card;
+  @Input() show: string = "front";
+  @Input() health: number = 0;
   beautifulBackUrl = "https://i.pinimg.com/236x/3c/73/0d/3c730d6df70700a3c912a3c87d6d2027.jpg";
 
-  constructor(public http:HttpClient, public api:ApiService) {
+  constructor(public http: HttpClient, public api: ApiService) {
 
   }
 
@@ -28,12 +28,21 @@ export class CardComponent implements OnInit {
     this.cards = await this.api.getPlayersCards();
     this.cardPowerr = await this.api.getCardsPower();
 
-    console.log(this.cardPowerr);
+
 
   }
 
 
-  turn(){
+  turn() {
     this.show = "front";
   }
+
+  bounceMe() {
+    this.bounce = true;
+    setTimeout(() => {this.bounce = false;},1000);
+  }
+
+
+
+
 }

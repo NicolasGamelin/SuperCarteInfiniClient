@@ -8,9 +8,10 @@
   <mat-card-content class="infinite-card-content" style="background-image: url({{card?.imageUrl}});">
     <table style="font-size: 2em; font-size: 2em; width: fit-content; text-shadow: 2px 2px 2px black;">
 
-      <tr *ngFor="let cardpower of cardPowerr">
-        <td *ngIf="card?.id === cardpower.card.id">
+      <tr  *ngFor="let cardpower of cardPowerr" >
+        <td [ngClass]="{'bounce-top': bounce}"  (click)="bounceMe()"  *ngIf="card?.id === cardpower.card.id" >
           Power: {{ cardpower.power.name }}
+
         </td>
       </tr>
 
