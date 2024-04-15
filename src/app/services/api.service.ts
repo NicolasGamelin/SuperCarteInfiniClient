@@ -57,6 +57,19 @@ Username: string[] = []
     return result;
   }
 
+  async getCardsPower(): Promise<any> {
+    const headerDict = {
+      "Access-Control-Allow-Origin": "http://localhost:4200"
+    };
+
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+
+    let result = await lastValueFrom(this.http.get<any>(environment.apiUrl+'api/card/GetCardPower', requestOptions));
+    return result;
+  }
+
   async Register(user:RegisterDTO)
   {
     let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Account/Register',user))

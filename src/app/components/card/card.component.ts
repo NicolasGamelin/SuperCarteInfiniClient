@@ -26,10 +26,8 @@ export class CardComponent implements OnInit {
 
   async ngOnInit() {
     this.cards = await this.api.getPlayersCards();
-    for (const card of this.cards) {
-      this.cardPowerr = card.cardPowers
+    this.cardPowerr = await this.api.getCardsPower();
 
-    }
     console.log(this.cardPowerr);
 
   }
