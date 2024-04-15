@@ -37,10 +37,21 @@ export class CardComponent implements OnInit {
     this.show = "front";
   }
 
-  bounceMe() {
-    this.bounce = true;
-    setTimeout(() => {this.bounce = false;},1000);
+  bouncingPowers: any[] = []; // Définir un tableau pour stocker les pouvoirs en cours d'animation
+
+  isBouncing(cardpower: any): boolean {
+    return this.bouncingPowers.includes(cardpower);
   }
+
+  bounceMe(cardpower: any) {
+    if (!this.isBouncing(cardpower)) {
+      this.bouncingPowers.push(cardpower);
+      setTimeout(() => {
+        this.bouncingPowers = this.bouncingPowers.filter(power => power !== cardpower);
+      }, 1000 * this.bouncingPowers.length);
+    }
+  }
+
 
 
 
