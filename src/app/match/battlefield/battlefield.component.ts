@@ -14,6 +14,7 @@ export class BattlefieldComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

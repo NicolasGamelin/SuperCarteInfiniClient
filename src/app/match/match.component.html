@@ -26,7 +26,7 @@
   <button (click)="endMatch()" mat-raised-button color="accent">Quitter la partie</button>
 </div>
 <div *ngIf="matchService.playerData">
-  <app-playerhand [cards]="matchService.playerData.hand"></app-playerhand>
+  <app-playerhand [cards]="matchService.playerData.hand" [matchId]="matchData?.match?.id" [userId]="matchData?.match?.playerDataA?.playerId"  ></app-playerhand>
   <button mat-raised-button [disabled]="!matchService.isCurrentPlayerTurn" class="endturn" color="accent" style="margin-right: 20px;" (click)="endTurn()">Terminer</button>
   <button mat-raised-button class="surrender" color="warn" style="margin-right: 20px;" (click)="surrender()">Abandonner</button>
   <app-health [enemy]="true" [maxhealth]="matchService.adversaryData!.maxhealth" [health]="matchService.adversaryData!.health" [mana]="matchService.adversaryData!.mana" [playername]="matchService.adversaryData!.playerName"></app-health>
