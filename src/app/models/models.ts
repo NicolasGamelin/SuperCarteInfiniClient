@@ -72,7 +72,7 @@ export interface Paquet {
     id:number;
     type:string;
     cout:number;
-    uRLImage:string;
+    urlImage:string;
     nombreCarte:number;
 }
 
@@ -90,7 +90,7 @@ export interface Power {
 export interface Rarity {
     id:number;
     name:string;
-    couleur:string;
+    couleur:number;
 }
 
 export interface CardPower {

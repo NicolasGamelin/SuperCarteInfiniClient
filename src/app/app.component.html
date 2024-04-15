@@ -2,10 +2,14 @@
   <mat-icon style="margin-right: 8px" routerLink="/">class</mat-icon>
   <a routerLink="/"><span>Super Cartes Infinies</span></a>
   <span style="flex: 1 1 auto;"></span>
-
+  
   <mat-chip *ngIf="isLogged()" style="margin-right: 20px;">
     {{getUsername()}}
   </mat-chip>
+  <div id="moneydiv">
+    <p id="money">{{ money | async }}</p>
+    <img class="coinIcon" src="/assets/coin2.png" alt="coin">
+  </div>
   <button mat-raised-button color="warn" *ngIf="isLogged()" (click)="logout()">Se déconnecter</button>
   <button mat-raised-button color="accent"  (click)="service.Private()">Test</button>
 </mat-toolbar>

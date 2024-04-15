@@ -1,12 +1,13 @@
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
-import {Card, Deck} from '../models/models';
+import { lastValueFrom, Observable } from 'rxjs';
+import { Card, Paquet, Deck} from '../models/models';
 import { environment } from 'src/environments/environment';
 import {LoginDTO} from "../models/LoginDTO";
 import {RegisterDTO} from "../models/RegisterDTO";
 import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
+import { Subject } from '@microsoft/signalr';
 import {ERROR} from "@angular/compiler-cli/src/ngtsc/logging/src/console_logger";
 import {Deckname} from "../models/Deckname";
 import {EditCardDTO} from "../models/EditCardDTO";
@@ -19,6 +20,12 @@ const LOCAL_STORAGE_PLAYERID_KEY = 'playerId';
   providedIn: 'root'
 })
 export class ApiService {
+
+  public emitChangeSource = new Subject<any>();
+
+  emitChange(change: any){
+    this.emitChangeSource.next(change);
+  }
 
   constructor(public http: HttpClient,public cookie:CookieService,public route:Router) {
     let userString = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -36,7 +43,6 @@ Username: string[] = []
     let result = await lastValueFrom(this.http.get<Card[]>(environment.apiUrl+'api/card/GetAllCards'));
     return result;
   }
-
 
   GetUserName(){
   return localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -110,6 +116,29 @@ async Private()
       this.Username.push(r[i])
     }
 
+  }
+
+  getMoney():Observable<number>{
+    return this.http.get<any>('https://localhost:7219/api/Account/getMoney');
+  }
+
+  getMoneyForWin(): Observable<number>{
+    return this.http.get<any>('https://localhost:7219/api/Account/getMoneyForWin');
+  }
+
+  getMoneyForLose(): Observable<number>{
+    return this.http.get<any>('https://localhost:7219/api/Account/getMoneyForLose');
+  }
+
+  async getAllPaquets(){
+    let result = await lastValueFrom(this.http.get<Paquet[]>(environment.apiUrl+'api/card/GetAllPaquets'));
+    return result;
+  }
+
+  async buyPaquet(id: number): Promise<Card[]>{
+    let result = await lastValueFrom(this.http.get<Card[]>(environment.apiUrl+'api/card/buyPaquet?id='+id));
+    console.log(result);
+    return result;
   }
 
 

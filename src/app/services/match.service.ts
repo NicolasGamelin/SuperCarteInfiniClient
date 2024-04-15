@@ -99,8 +99,6 @@ export class MatchService {
 
     if(this.match.playerDataA.playerId == this.currentPlayerId)
     {
-      console.log(this.match.playerDataA, "PlayerAData")
-      console.log(this.match.playerDataB, "PlayerBData")
       this.playerData = this.match.playerDataA!;
       this.playerData.playerName = matchData.playerA.name;
       this.adversaryData = this.match.playerDataB!;
@@ -110,8 +108,6 @@ export class MatchService {
     }
     else
     {
-      console.log(this.match.playerDataA, "PlayerAData")
-      console.log(this.match.playerDataB, "PlayerbData")
       this.playerData = this.match.playerDataB!;
       this.playerData.playerName = matchData.playerB.name;
       this.adversaryData = this.match.playerDataA!;
@@ -120,13 +116,9 @@ export class MatchService {
     }
     this.playerData.maxhealth = this.playerData.health;
     this.adversaryData.maxhealth = this.adversaryData.health;
-
-    // console.log(this.matchData);
   }
 
   async applyEvent(event:any){
-    console.log("ApplyingEvent:");
-    console.log(event);
     switch(event.$type){
       case "StartMatch": {
         await new Promise(resolve => setTimeout(resolve, 1000));

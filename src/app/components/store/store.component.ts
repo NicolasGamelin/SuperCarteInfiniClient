@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Card} from "../../models/models";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Card, Paquet} from "../../models/models";
 import {ApiService} from "../../services/api.service";
 
 @Component({
@@ -11,6 +11,7 @@ export class StoreComponent implements OnInit{
 
   constructor(public api:ApiService) { }
   cards:Card[] = [];
+  paquets:Paquet[] = [];
   @Input() card?:Card;
   @Input() show:string = "front";
   @Input() health:number = 0;
@@ -20,8 +21,6 @@ export class StoreComponent implements OnInit{
 
  async ngOnInit() {
     this.cards = await this.api.getAllCards();
+    this.paquets = await this.api.getAllPaquets();
   }
-
-
-
 }

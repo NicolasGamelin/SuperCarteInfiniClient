@@ -21,6 +21,7 @@ import {CookieService} from "ngx-cookie-service";
 import {InterceptorinterceptorInterceptor} from "./interceptorinterceptor.interceptor";
 import {StoreComponent} from "./components/store/store.component";
 import {CardsComponent} from "./components/cards/cards.component";
+import { PaquetComponent } from './components/paquet/paquet.component';
 import {DeckComponent} from "./components/deck/deck.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
@@ -41,6 +42,8 @@ import {MatSelectModule} from "@angular/material/select";
     RegisterComponent,
     LoginComponent,
     StoreComponent,
+    CardsComponent,
+    PaquetComponent,
     CardsComponent,
     DeckComponent
    ],

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Card } from 'src/app/models/models';
 import {HttpClient} from "@angular/common/http";
 import {lastValueFrom} from "rxjs";
@@ -27,5 +27,7 @@ export class CardComponent implements OnInit {
   }
 
 
-
+  turn(){
+    this.show = "front";
+  }
 }

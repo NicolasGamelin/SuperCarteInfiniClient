@@ -1,0 +1,18 @@
+<div (click)="buy()" class="paquet" style="background-image: url({{paquet?.urlImage}});">
+    <p class="paquetTitle">{{paquet?.type}}</p>
+    <div class="paquetPrix">
+        <p class="paquetPrixTexte">{{paquet?.cout}}</p>
+        <img class="coinIcon" src="/assets/coin2.png" alt="coin">
+    </div>
+</div>
+<div class="openingScreen" *ngIf="cardsToShow.length > 0">
+    <div class="mainNewCardScreen">
+        <div class="card-list">
+            <app-card class="coolCard" *ngFor="let card of cardsToShow" [card]="card" [health]="card.health" [show]="show"></app-card>
+        </div>
+        <div class="rowButton">
+            <button (click)="quit()">Quit</button>
+            <button (click)="showAll()">show all</button>
+        </div>
+    </div>
+</div>
