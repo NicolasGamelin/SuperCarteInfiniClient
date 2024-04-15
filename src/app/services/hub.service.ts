@@ -63,6 +63,13 @@ export class hubService {
         this.hubConnection.invoke('EndTurn', matchId.toString(), userId.toString())
     }
 
+  async PlayCard(matchId: any, userId: any, playableCardId:any){
+    if (this.hubConnection.state == "Disconnected"){
+      await this.connectToHub()
+    }
+    this.hubConnection.invoke('PlayCard', matchId.toString(), userId.toString(), playableCardId.toString())
+  }
+
     async Surrender(matchId: number, userId: number){
         if (this.hubConnection.state == "Disconnected"){
             await this.connectToHub()

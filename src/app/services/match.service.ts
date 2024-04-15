@@ -146,6 +146,99 @@ export class MatchService {
 
         break;
       }
+
+      case "PlayCard": {
+        let playerData = this.getPlayerData(event.PlayerId);
+        if (playerData?.hand != undefined ){
+          this.moveCard(playerData?.hand, playerData?.battleField, event.playableCardId);
+
+        }
+
+        break;
+      }
+
+      case "CardDie": {
+        let playerData = this.getPlayerData(event.PlayerId);
+        if (playerData?.hand != undefined ){
+          this.moveCard(playerData?.battleField, playerData?.graveyard, event.playableCardId);
+
+        }
+
+        break;
+      }
+
+      case "LostHealth": {
+        let playerData = this.getPlayerData(event.PlayerId);
+        if (event.PlayableCardId == 0 && playerData?.health == 0) {
+          playerData.health-=event.Damage;
+        }else {
+          let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+          if (card != undefined) {
+            card.health -= event.Damage;
+          }
+        }
+
+        break;
+      }
+
+      case "CardHealed": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+        if (card != undefined) {
+          card.health += event.heal;
+        }
+        break;
+      }
+
+      case "Heal": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+
+
+
+      case "Thorn": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+
+
+      case "OneShot": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+
+
+
+      case "FirstStrike": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+
+      case "CardActivation": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+
+
+
+
       case "DrawCard": {
         let playerData = this.getPlayerData(event.PlayerId);
         if(playerData)

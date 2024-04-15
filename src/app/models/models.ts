@@ -55,7 +55,9 @@ export interface Deck {
     id:number;
     name:string;
     playerId:number;
-    player:Player
+    player:Player;
+    cards:OwnedCard[];
+    isActive:boolean;
 }
 
 export interface DeckCard {
@@ -106,4 +108,9 @@ export interface PaquetRarity {
     minimum:number;
     rarity:Rarity;
     paquet:Paquet;
+}
+
+export interface OwnedCard{
+  id:number;
+  card:Card;
 }

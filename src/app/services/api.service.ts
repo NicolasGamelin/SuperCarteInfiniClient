@@ -1,13 +1,17 @@
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom, Observable } from 'rxjs';
-import { Card, Paquet } from '../models/models';
+import { Card, Paquet, Deck} from '../models/models';
 import { environment } from 'src/environments/environment';
 import {LoginDTO} from "../models/LoginDTO";
 import {RegisterDTO} from "../models/RegisterDTO";
 import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
 import { Subject } from '@microsoft/signalr';
+import {ERROR} from "@angular/compiler-cli/src/ngtsc/logging/src/console_logger";
+import {Deckname} from "../models/Deckname";
+import {EditCardDTO} from "../models/EditCardDTO";
+
 
 const LOCAL_STORAGE_KEY = 'username';
 const LOCAL_STORAGE_PLAYERID_KEY = 'playerId';
@@ -149,4 +153,112 @@ async Private()
     console.log(result);
     return result;
   }
+
+
+
+
+
+async getAllDecks(){
+  let r:Deck[] = await lastValueFrom(this.http.get<Deck[]>('https://localhost:7219/api/Deck/GetDecks'));
+  console.log(r);
+  return r;
+}
+
+
+
+  async createDeck(name:Deckname):Promise<Deck | null>{
+
+  try {
+    let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Deck/CreateDeck', name));
+    console.log(r);
+    return r;
+  }
+  catch (e) {
+    const error = e as HttpErrorResponse
+    console.log(error.error.error);
+    this.error = error.error.error;
+  }
+  return null
+}
+
+
+async deleteDeck(deckId:number){
+  try {
+    let r = await lastValueFrom(this.http.get<any>('https://localhost:7219/api/Deck/DeleteDeck/'+deckId));
+    console.log(r);
+    return r;
+  }
+  catch (e) {
+    const error = e as HttpErrorResponse
+    console.log(error.error.error);
+    this.error = error.error.error;
+  }
+}
+
+  async addCard(deckId:number, cardId:number){
+
+  let info:EditCardDTO = new EditCardDTO(deckId, cardId);
+    try {
+      let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Deck/AddCard/', info));
+      console.log(r);
+      return r;
+    }
+    catch (e) {
+      const error = e as HttpErrorResponse
+      console.log(error.error.error);
+      this.error = error.error.error;
+    }
+  }
+
+  async RemoveCard(deckId:number, cardId:number){
+    let info:EditCardDTO = new EditCardDTO(deckId, cardId);
+    try {
+      let r = await lastValueFrom(this.http.post<any>('https://localhost:7219/api/Deck/RemoveCard/', info));
+      console.log(r);
+      return r;
+    }
+    catch (e) {
+      const error = e as HttpErrorResponse
+      console.log(error.error.error);
+      this.error = error.error.error;
+    }
+  }
+
+  async SetDeckAsActive(deckId:number):Promise<void>{
+
+
+    try {
+      let r = await lastValueFrom(this.http.get<any>('https://localhost:7219/api/Deck/SetDeckAsActive/' + deckId));
+      console.log(r);
+      return r;
+    }
+    catch (e) {
+      const error = e as HttpErrorResponse
+      console.log(error.error.error);
+      this.error = error.error.error;
+    }
+  }
+
+  async GetOwnedCards(deckId:number):Promise<any>{
+    try {
+      let r = await lastValueFrom(this.http.get<any>('https://localhost:7219/api/Deck/GetOwnedCards/' + deckId));
+      console.log(r);
+      return r;
+    }
+    catch (e) {
+      const error = e as HttpErrorResponse
+      console.log(error.error.error);
+      this.error = error.error.error;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
 }
