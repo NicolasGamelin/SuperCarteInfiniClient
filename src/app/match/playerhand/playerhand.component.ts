@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PlayableCard } from 'src/app/models/models';
+import {hubService} from "../../services/hub.service";
 
 @Component({
   selector: 'app-playerhand',
@@ -9,14 +10,21 @@ import { PlayableCard } from 'src/app/models/models';
 export class PlayerhandComponent implements OnInit {
 
   @Input() cards: PlayableCard[] = [];
+  @Input() matchId: any;
+  @Input() userId: any;
 
-  constructor() { }
+  constructor(public hubService: hubService) { }
 
   ngOnInit() {
     console.log(this.cards)
   }
 
-  click(playableCardId:any){
+  async click(playableCardId: any) {
     // TODO: Utiliser seulement une fois que l'on peut jouer des cartes (TP2)
+
+
+    await this.hubService.PlayCard(this.matchId,this.userId,playableCardId);
+
+
   }
 }
