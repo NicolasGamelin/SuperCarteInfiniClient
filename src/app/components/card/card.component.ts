@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Card } from 'src/app/models/models';
+import {Card, CardPower} from 'src/app/models/models';
 import {HttpClient} from "@angular/common/http";
 import {lastValueFrom} from "rxjs";
 import {ApiService} from "../../services/api.service";
@@ -13,6 +13,8 @@ import {ApiService} from "../../services/api.service";
 export class CardComponent implements OnInit {
 
   cards:Card[] = [];
+  cardPowerr:CardPower[] =[];
+
   @Input() card?:Card;
   @Input() show:string = "front";
   @Input() health:number = 0;
@@ -24,6 +26,10 @@ export class CardComponent implements OnInit {
 
   async ngOnInit() {
     this.cards = await this.api.getPlayersCards();
+    for (const card of this.cards) {
+      this.cardPowerr = card.cardPowers
+    }
+
   }
 
 
