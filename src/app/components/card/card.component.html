@@ -10,10 +10,13 @@
       <tr>
         <td><i class="fas fa-fist-raised"></i></td>
         <td>{{card?.attack}}</td>
+<div *ngIf="cardPowerr.length > 0">
+  <td *ngFor="let cardpower of card!.cardPowers ">
+    {{cardpower.power.name}}
+  </td>
+</div>
 
-        <td *ngFor="let card of cardPowerr">
-          {{card.power.name}}
-        </td>
+
       </tr>
       <tr [class.red]="health < card?.defense! && health>0">
         <td><i class="fas fa-shield-alt"></i></td>

@@ -28,7 +28,9 @@ export class CardComponent implements OnInit {
     this.cards = await this.api.getPlayersCards();
     for (const card of this.cards) {
       this.cardPowerr = card.cardPowers
+
     }
+    console.log(this.cardPowerr);
 
   }
 
