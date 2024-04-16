@@ -151,7 +151,7 @@ export class MatchService {
         let playerData = this.getPlayerData(event.PlayerId);
         if (playerData?.hand != undefined ){
           this.moveCard(playerData?.hand, playerData?.battleField, event.playableCardId);
-
+playerData.mana -= event.manaLost;
         }
 
         break;
@@ -169,12 +169,16 @@ export class MatchService {
 
       case "LostHealth": {
         let playerData = this.getPlayerData(event.PlayerId);
-        if (event.PlayableCardId == 0 && playerData?.health == 0) {
+        console.log(playerData +"avant")
+        if (event.PlayableCardId == 0 && playerData?.health != null) {
           playerData.health-=event.Damage;
+          console.log(playerData + "playerData")
         }else {
+          console.log(playerData + "card")
           let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
           if (card != undefined) {
             card.health -= event.Damage;
+            console.log(playerData + "card")
           }
         }
 
@@ -185,8 +189,12 @@ export class MatchService {
         let playerData = this.getPlayerData(event.PlayerId);
 
         let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+        // @ts-ignore
+        console.log(card.health +"n'entre pas")
         if (card != undefined) {
+          console.log(card.health +"après")
           card.health += event.heal;
+          console.log(card.health +"après")
         }
         break;
       }
