@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PlayableCard } from 'src/app/models/models';
+import {MatchData, PlayableCard} from 'src/app/models/models';
 import {hubService} from "../../services/hub.service";
 
 @Component({
@@ -10,8 +10,8 @@ import {hubService} from "../../services/hub.service";
 export class PlayerhandComponent implements OnInit {
 
   @Input() cards: PlayableCard[] = [];
-  @Input() matchId: any;
-  @Input() userId: any;
+  @Input() matchData: MatchData | any;
+
 
   constructor(public hubService: hubService) { }
 
@@ -19,11 +19,16 @@ export class PlayerhandComponent implements OnInit {
     console.log(this.cards)
   }
 
-  async click(playableCardId: any) {
+  async click(playableCardId: number| any) {
     // TODO: Utiliser seulement une fois que l'on peut jouer des cartes (TP2)
 
+    if (this.matchData!.playerA.name == localStorage.getItem('username')!){
+      await this.hubService.PlayCard(this.matchData?.match.id!,this.matchData!.match.playerDataB.playerId,playableCardId);
+    }
+    else{
+      await this.hubService.PlayCard(this.matchData?.match.id!,this.matchData!.match.playerDataA.playerId,playableCardId);
+    }
 
-    await this.hubService.PlayCard(this.matchId,this.userId,playableCardId);
 
 
   }
