@@ -81,6 +81,7 @@ export class MatchComponent implements OnInit {
   }
 
   async endTurn() {
+    this.toggleIcon()
     await this.hubService.EndTurn(this.matchData?.match.id!, localStorage.getItem('username')!)
   }
 
@@ -106,5 +107,14 @@ export class MatchComponent implements OnInit {
 
   getMoneyForLose(): Observable<number>{
     return this.apiService.getMoneyForLose();
+  }
+
+  showIcon: boolean = false;
+
+  toggleIcon() {
+    this.showIcon = true;
+    setTimeout(() => {
+      this.showIcon = false;
+    }, 2000); // L'icône est affichée pendant 2 secondes
   }
 }

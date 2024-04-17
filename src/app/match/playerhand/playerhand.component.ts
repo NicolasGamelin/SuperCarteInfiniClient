@@ -24,6 +24,7 @@ export class PlayerhandComponent implements OnInit {
 
     if (this.matchData!.playerA.name == localStorage.getItem('username')!){
       await this.hubService.PlayCard(this.matchData?.match.id!,this.matchData!.match.playerDataB.playerId,playableCardId);
+
     }
     else{
       await this.hubService.PlayCard(this.matchData?.match.id!,this.matchData!.match.playerDataA.playerId,playableCardId);

@@ -10,21 +10,17 @@ export class BattlefieldComponent implements OnInit {
 
   @Input() cards: PlayableCard[] = [];
   @Input() align: string = 'top';
+  @Input() showIcon!: boolean;
   bounce = false;
-  constructor() { }
+
+
+
+  constructor() {
+  }
 
   ngOnInit() {
 
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    this.bounce = true;
-    this.bounceme();
-  }
 
-
-  bounceme() {
-    this.bounce = true;
-    setTimeout(() => {this.bounce = false;},1000);
-  }
 
 }
