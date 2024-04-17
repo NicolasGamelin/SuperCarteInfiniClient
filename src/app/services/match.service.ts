@@ -10,6 +10,7 @@ export class MatchService {
   match:Match | null = null;
   matchData:MatchData | null = null;
   currentPlayerId:number = -1;
+  Card : PlayableCard| null = null;
 
   playerData: PlayerData | undefined;
   adversaryData: PlayerData | undefined;
@@ -26,6 +27,7 @@ export class MatchService {
     this.adversaryData = undefined;
     this.opponentSurrendered = false;
     this.isCurrentPlayerTurn = false;
+    this.Card = null;
   }
 
   playTestMatch(cards:Card[]){
@@ -174,12 +176,16 @@ playerData.mana -= event.manaLost;
           playerData.health-=event.Damage;
           console.log(playerData + "playerData")
         }else {
-          console.log(playerData + "card")
-          let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
-          if (card != undefined) {
-            card.health -= event.Damage;
-            console.log(playerData + "card")
-          }
+          // @ts-ignore
+          //console.log(playerData?.battleField.find(c => c.id == event.PlayableCardId).health + "card")
+          // @ts-ignore
+          // playerData.battleField.find(c => c.id == event.PlayableCardId).health-=event.Damage;
+          // @ts-ignore
+          //console.log(playerData?.battleField.find(c => c.id == event.PlayableCardId).health + "card")
+const card =playerData.battleField.find(c => c.id == event.PlayableCardId);
+if(card){
+  card.health-=event.Damage;
+}
         }
 
         break;
@@ -188,9 +194,8 @@ playerData.mana -= event.manaLost;
       case "CardHealed": {
         let playerData = this.getPlayerData(event.PlayerId);
 
-        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
-        // @ts-ignore
-        console.log(card.health +"n'entre pas")
+        const card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
         if (card != undefined) {
           console.log(card.health +"après")
           card.health += event.heal;
@@ -277,6 +282,11 @@ playerData.mana -= event.manaLost;
         return this.match.playerDataB;
     }
     return null;
+  }
+
+  low(p : PlayerData, value:any,playableCardId:any){
+
+
   }
 
   moveCard(src:PlayableCard[], dst:PlayableCard[], playableCardId:any){
