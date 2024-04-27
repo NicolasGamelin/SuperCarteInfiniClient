@@ -9,9 +9,12 @@ export interface Card {
     name: string;
     health: number;
     attack: number;
+    defense: number;
     cost: number;
     imageUrl: string;
     cardPowers:CardPower[];
+    rarityId: number;
+    rarity: Rarity;
 }
 
 export interface MatchData {
@@ -52,7 +55,9 @@ export interface Deck {
     id:number;
     name:string;
     playerId:number;
-    player:Player
+    player:Player;
+    cards:OwnedCard[];
+    isActive:boolean;
 }
 
 export interface DeckCard {
@@ -67,7 +72,7 @@ export interface Paquet {
     id:number;
     type:string;
     cout:number;
-    uRLImage:string;
+    urlImage:string;
     nombreCarte:number;
 }
 
@@ -85,7 +90,7 @@ export interface Power {
 export interface Rarity {
     id:number;
     name:string;
-    couleur:string;
+    couleur:number;
 }
 
 export interface CardPower {
@@ -103,4 +108,9 @@ export interface PaquetRarity {
     minimum:number;
     rarity:Rarity;
     paquet:Paquet;
+}
+
+export interface OwnedCard{
+  id:number;
+  card:Card;
 }

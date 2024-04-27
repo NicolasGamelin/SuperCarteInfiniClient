@@ -2,30 +2,32 @@
   <div style="height: 45%;">
     <h1 style="position: absolute;">Adversaire</h1>
     <div *ngIf="matchService.adversaryData">
-      <app-battlefield [cards]="matchService.adversaryData.battleField"></app-battlefield>
+      <app-battlefield [cards]="matchService.adversaryData.battleField" ></app-battlefield>
       <app-enemyhand [cards]="matchService.adversaryData.hand"></app-enemyhand>
     </div>
   </div>
   <div style="height: 45%;">
     <h1 style="position: absolute;">Mon jeu</h1>
     <div *ngIf="matchService.playerData">
-      <app-battlefield [cards]="matchService.playerData.battleField"></app-battlefield>
+      <app-battlefield [cards]="matchService.playerData.battleField" [showIcon]="showIcon"></app-battlefield>
     </div>
 
   </div>
 </div>
 <div *ngIf="matchService.matchData != null && matchService.matchData.winningPlayerId == matchService.adversaryData!.playerId" class="end endtext">
   <span>Défaite 😩</span>
+  <span class="spanMoney">+{{moneyForLose | async }} <img class="coinIcon" src="/assets/coin2.png" alt="coin"></span>
   <button (click)="endMatch()" mat-raised-button color="accent">Quitter la partie</button>
 </div>
 <div *ngIf="matchService.matchData != null && matchService.matchData.winningPlayerId == matchService.playerData!.playerId" class="end endtext">
   <span>Votre adversaire à abandonner</span>
   <span>Victoire 🥳 🐈</span>
+  <span class="spanMoney">+{{moneyForWin | async }} <img class="coinIcon" src="/assets/coin2.png" alt="coin"></span>
   <button (click)="endMatch()" mat-raised-button color="accent">Quitter la partie</button>
 </div>
 <div *ngIf="matchService.playerData">
-  <app-playerhand [cards]="matchService.playerData.hand"></app-playerhand>
-  <button mat-raised-button [disabled]="!matchService.isCurrentPlayerTurn" class="endturn" color="accent" style="margin-right: 20px;" (click)="endTurn()">Terminer</button>
+  <app-playerhand [cards]="matchService.playerData.hand" [matchData]="matchData"   ></app-playerhand>
+  <button mat-raised-button [disabled]="!matchService.isCurrentPlayerTurn" class="endturn" color="accent" style="margin-right: 20px;" (click)="endTurn(); toggleIcon()">Terminer</button>
   <button mat-raised-button class="surrender" color="warn" style="margin-right: 20px;" (click)="surrender()">Abandonner</button>
   <app-health [enemy]="true" [maxhealth]="matchService.adversaryData!.maxhealth" [health]="matchService.adversaryData!.health" [mana]="matchService.adversaryData!.mana" [playername]="matchService.adversaryData!.playerName"></app-health>
   <app-health [maxhealth]="matchService.playerData!.maxhealth" [health]="matchService.playerData!.health" [mana]="matchService.playerData!.mana" [playername]="matchService.playerData!.playerName"></app-health>

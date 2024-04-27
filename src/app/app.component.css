@@ -1,0 +1,16 @@
+#money{
+    margin-bottom: 0;
+}
+
+#moneydiv{
+    margin-right: 20px;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+}
+
+.coinIcon{
+    width: 30px;
+    height: 30px;
+}

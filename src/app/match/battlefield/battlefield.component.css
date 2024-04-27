@@ -1,8 +1,19 @@
 .container {
-  padding: 5px; 
+  padding: 5px;
   display: flex;
   position: relative;
   width: fit-content;
   margin: auto;
   transform: scale(0.7);
+}
+
+@keyframes bounce-top {
+  0% {
+    transform: translateY(-45px);
+  }
+
+}
+
+.bounce-top {
+  animation: bounce-top 1s ease;
 }

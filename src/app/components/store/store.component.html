@@ -6,3 +6,7 @@
 <mat-card *ngIf="show=='back'"  class="infinite-card" style="background-image: url({{beautifulBackUrl}});">
 
 </mat-card>
+<h2 style="text-align: center;">Paquets</h2>
+<div class="card-list">
+    <app-paquet *ngFor="let paquet of paquets" [paquet]="paquet"></app-paquet>
+</div>

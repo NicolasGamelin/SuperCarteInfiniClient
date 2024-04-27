@@ -18,6 +18,7 @@ export class CardsComponent implements OnInit{
 
     async ngOnInit(): Promise<void> {
         this.cards = await this.api.getPlayersCards();
+
     }
 
 }

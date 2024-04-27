@@ -10,6 +10,7 @@ export class MatchService {
   match:Match | null = null;
   matchData:MatchData | null = null;
   currentPlayerId:number = -1;
+  Card : PlayableCard| null = null;
 
   playerData: PlayerData | undefined;
   adversaryData: PlayerData | undefined;
@@ -26,6 +27,7 @@ export class MatchService {
     this.adversaryData = undefined;
     this.opponentSurrendered = false;
     this.isCurrentPlayerTurn = false;
+    this.Card = null;
   }
 
   playTestMatch(cards:Card[]){
@@ -61,11 +63,13 @@ export class MatchService {
       },
       playerA: {
         id: 1,
-        name: "Adversaire"
+        name: "Adversaire",
+        money: 0
       },
       playerB: {
         id: 2,
-        name: "Joueur"
+        name: "Joueur",
+        money: 0
       },
       winningPlayerId: -1
     }
@@ -97,8 +101,6 @@ export class MatchService {
 
     if(this.match.playerDataA.playerId == this.currentPlayerId)
     {
-      console.log(this.match.playerDataA, "PlayerAData")
-      console.log(this.match.playerDataB, "PlayerBData")
       this.playerData = this.match.playerDataA!;
       this.playerData.playerName = matchData.playerA.name;
       this.adversaryData = this.match.playerDataB!;
@@ -108,8 +110,6 @@ export class MatchService {
     }
     else
     {
-      console.log(this.match.playerDataA, "PlayerAData")
-      console.log(this.match.playerDataB, "PlayerbData")
       this.playerData = this.match.playerDataB!;
       this.playerData.playerName = matchData.playerB.name;
       this.adversaryData = this.match.playerDataA!;
@@ -118,13 +118,9 @@ export class MatchService {
     }
     this.playerData.maxhealth = this.playerData.health;
     this.adversaryData.maxhealth = this.adversaryData.health;
-
-    // console.log(this.matchData);
   }
 
   async applyEvent(event:any){
-    console.log("ApplyingEvent:");
-    console.log(event);
     switch(event.$type){
       case "StartMatch": {
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -152,6 +148,110 @@ export class MatchService {
 
         break;
       }
+
+      case "PlayCard": {
+        let playerData = this.getPlayerData(event.PlayerId);
+        if (playerData?.hand != undefined ){
+          this.moveCard(playerData?.hand, playerData?.battleField, event.playableCardId);
+playerData.mana -= event.manaLost;
+        }
+
+        break;
+      }
+
+      case "CardDie": {
+        let playerData = this.getPlayerData(event.PlayerId);
+        if (playerData?.hand != undefined ){
+          this.moveCard(playerData?.battleField, playerData?.graveyard, event.playableCardId);
+
+        }
+
+        break;
+      }
+
+      case "LostHealth": {
+        let playerData = this.getPlayerData(event.PlayerId);
+        console.log(playerData +"avant")
+        if (event.PlayableCardId == 0 && playerData?.health != null) {
+          playerData.health-=event.Damage;
+          console.log(playerData + "playerData")
+        }else {
+          // @ts-ignore
+          //console.log(playerData?.battleField.find(c => c.id == event.PlayableCardId).health + "card")
+          // @ts-ignore
+          // playerData.battleField.find(c => c.id == event.PlayableCardId).health-=event.Damage;
+          // @ts-ignore
+          //console.log(playerData?.battleField.find(c => c.id == event.PlayableCardId).health + "card")
+const card =playerData.battleField.find(c => c.id == event.PlayableCardId);
+if(card){
+  card.health-=event.Damage;
+}
+        }
+
+        break;
+      }
+
+      case "CardHealed": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        const card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        if (card != undefined) {
+          console.log(card.health +"après")
+          card.health += event.heal;
+          console.log(card.health +"après")
+        }
+        break;
+      }
+
+      case "Heal": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+
+
+
+      case "Thorn": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+
+
+      case "OneShot": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+
+
+
+      case "FirstStrike": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+
+      case "CardActivation": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+
+
+
+
       case "DrawCard": {
         let playerData = this.getPlayerData(event.PlayerId);
         if(playerData)
@@ -182,6 +282,11 @@ export class MatchService {
         return this.match.playerDataB;
     }
     return null;
+  }
+
+  low(p : PlayerData, value:any,playableCardId:any){
+
+
   }
 
   moveCard(src:PlayableCard[], dst:PlayableCard[], playableCardId:any){

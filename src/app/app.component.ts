@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatchService } from './services/match.service';
 import { Router } from '@angular/router';
 import {ApiService} from "./services/api.service";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,23 @@ import {ApiService} from "./services/api.service";
 export class AppComponent {
   title = 'supercartesinfinies';
 
-  constructor(public router: Router, public matchService:MatchService,public service:ApiService) { }
+  public money:Observable<number> = this.getMoney();
+
+  constructor(public router: Router, public matchService:MatchService,public service:ApiService) { 
+    service.emitChangeSource.subscribe({
+      next: (v) => {
+        console.log(v);
+        this.money = this.money;
+        this.money = this.getMoney();
+      },
+      error: function (err: any): void {
+        console.log(err);
+      },
+      complete: function (): void {
+        
+      }
+    });
+  }
 
   isLogged(){
     // TODO: Gérer l'affichage du joueur lorsqu'il est connecté
@@ -29,4 +46,7 @@ export class AppComponent {
      await this.service.Logout()
   }
 
+  getMoney(): Observable<number>{
+    return this.service.getMoney();
+  }
 }
