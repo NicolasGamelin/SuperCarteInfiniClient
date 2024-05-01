@@ -26,6 +26,7 @@ import {DeckComponent} from "./components/deck/deck.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import {GameListComponent} from "./components/game-list/game-list.component";
 
 
 
@@ -45,7 +46,8 @@ import {MatSelectModule} from "@angular/material/select";
     CardsComponent,
     PaquetComponent,
     CardsComponent,
-    DeckComponent
+    DeckComponent,
+    GameListComponent
    ],
   imports: [
     BrowserModule,
