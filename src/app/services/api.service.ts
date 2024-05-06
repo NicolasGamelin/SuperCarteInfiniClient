@@ -1,7 +1,7 @@
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom, Observable } from 'rxjs';
-import { Card, Paquet, Deck} from '../models/models';
+import {Card, Paquet, Deck, MatchInfo} from '../models/models';
 import { environment } from 'src/environments/environment';
 import {LoginDTO} from "../models/LoginDTO";
 import {RegisterDTO} from "../models/RegisterDTO";
@@ -250,6 +250,20 @@ async deleteDeck(deckId:number){
       console.log(error.error.error);
       this.error = error.error.error;
     }
+  }
+
+  async  GetMatches():Promise<any>{
+    try {
+      let r:MatchInfo[] = await lastValueFrom(this.http.get<MatchInfo[]>('https://localhost:7219/api/Match/GetMatchList'));
+      console.log(r);
+      return r;
+    }
+    catch (e) {
+      const error = e as HttpErrorResponse
+      console.log(error.error.error);
+      this.error = error.error.error;
+    }
+
   }
 
 

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MatchInfo} from "../../models/models";
 import {hubService} from "../../services/hub.service";
+import {ApiService} from "../../services/api.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-game-list',
@@ -9,14 +11,22 @@ import {hubService} from "../../services/hub.service";
 })
 export class GameListComponent implements OnInit{
 
-  constructor(public hubService: hubService) {
+  constructor(public service: ApiService, public hubService: hubService,public router: Router) {
   }
 
 
     matches:MatchInfo[] = [];
     async ngOnInit(): Promise<void> {
-      this.matches = await this.hubService.GetMatches();
+      this.matches = await this.service.GetMatches();
       console.log(this.matches);
     }
+
+  async joinMatch(matchid:number) {
+
+
+    this.hubService.hubConnection.on('redirectToMatch', (data: any) => {
+      this.router.navigateByUrl('/match/'+data)
+    })
+  }
 
 }

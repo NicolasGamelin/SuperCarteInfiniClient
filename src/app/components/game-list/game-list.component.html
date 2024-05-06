@@ -1,5 +1,5 @@
-<div *ngFor="let match of matches">
+<div class="match" *ngFor="let match of matches">
 
-   (player A) {{match.MatchId }} vs (player B) {{match.PlayerBUsername}}
+    {{match.playerAUsername }} vs  {{match.playerBUsername}} <button (click)="joinMatch(match.matchId)"> regarder</button>
 
 </div>

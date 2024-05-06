@@ -77,10 +77,5 @@ export class hubService {
         this.hubConnection.invoke('Surrender', matchId.toString(), userId.toString())
     }
 
-    async  GetMatches():Promise<MatchInfo[]>{
-      if (this.hubConnection.state == "Disconnected"){
-        await this.connectToHub()
-      }
-      return this.hubConnection.invoke('GetMatchList')
-    }
+
 }
