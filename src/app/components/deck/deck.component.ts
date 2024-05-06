@@ -27,6 +27,11 @@ export class DeckComponent implements OnInit{
 
   async ngOnInit(): Promise<void> {
     this.decklist = await this.service.getAllDecks();
+
+    this.service.StatByadef(0);
+    this.service.StatByattack(0);
+    this.service.StatByrarity(0);
+    this.service.StatByCost(0);
     }
 
  async createDeck(name:string){

@@ -154,6 +154,28 @@ async Private()
     return result;
   }
 
+  async StatByCost(id: number): Promise<any>{
+    let result = await lastValueFrom(this.http.get<any>(environment.apiUrl+'api/Statistiques/StatCost?DeckId='+id));
+    console.log(result);
+    return result;
+  }
+
+  async StatByrarity(id: number): Promise<any>{
+    let result = await lastValueFrom(this.http.get<any>(environment.apiUrl+'api/Statistiques/StatAttack?DeckId='+id));
+    console.log(result);
+    return result;
+  }
+
+  async StatByattack(id: number): Promise<any>{
+    let result = await lastValueFrom(this.http.get<any>(environment.apiUrl+'api/Statistiques/StatDef?DeckId='+id));
+    console.log(result);
+    return result;
+  }
+  async StatByadef(id: number): Promise<any>{
+    let result = await lastValueFrom(this.http.get<any>(environment.apiUrl+'api/Statistiques/StatRarity?DeckId='+id));
+    console.log(result);
+    return result;
+  }
 
 
 
