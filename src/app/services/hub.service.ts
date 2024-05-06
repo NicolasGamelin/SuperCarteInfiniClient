@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import * as signalR from "@microsoft/signalr";
-import { Card, Match, MatchData, PlayableCard, Player, PlayerData } from "../models/models";
+import { Card, Match, MatchData, PlayableCard, Player, PlayerData, MatchInfo } from "../models/models";
 import { MatchService } from "./match.service";
 
 @Injectable({
@@ -75,5 +75,12 @@ export class hubService {
             await this.connectToHub()
         }
         this.hubConnection.invoke('Surrender', matchId.toString(), userId.toString())
+    }
+
+    async  GetMatches():Promise<MatchInfo[]>{
+      if (this.hubConnection.state == "Disconnected"){
+        await this.connectToHub()
+      }
+      return this.hubConnection.invoke('GetMatchList')
     }
 }

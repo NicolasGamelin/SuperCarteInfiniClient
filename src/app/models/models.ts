@@ -114,3 +114,9 @@ export interface OwnedCard{
   id:number;
   card:Card;
 }
+
+export interface MatchInfo{
+  MatchId:number;
+  PlayerAUsername:string;
+  PlayerBUsername:string;
+}
