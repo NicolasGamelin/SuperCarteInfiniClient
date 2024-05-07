@@ -1,1 +1,10 @@
-<p>statistique works!</p>
+<mat-form-field>
+  <mat-label>Decks</mat-label>
+  <mat-select [(ngModel)]="selectedDeckID" (ngModelChange)="selectDeck()" name="selectedDeck" >
+    <mat-option *ngFor="let deck of decklist" value="{{deck.id}}">{{ deck.name }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<app-rarity [selectedDeckID]="selectedDeckID" >
+
+</app-rarity>

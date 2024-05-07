@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Deck} from "../../../models/models";
 
 @Component({
   selector: 'app-cost',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./cost.component.css']
 })
 export class CostComponent {
-
+  @Input()  selectedDeckID:number = 0;
 }

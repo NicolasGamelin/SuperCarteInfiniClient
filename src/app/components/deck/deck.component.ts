@@ -22,10 +22,9 @@ export class DeckComponent implements OnInit{
   selectedCardID:number = 0;
   decklist:Deck[] = [];
   name:string = "";
-chart : any;
 
-  StatByRarity: any[] = [];
-  d: {y: number, rarity: number}[] = [];
+
+
 
   deckname:Deckname = new Deckname("");
   selectedDeck:Deck | undefined;
@@ -35,34 +34,9 @@ chart : any;
 
   async ngOnInit(): Promise<void> {
     this.decklist = await this.service.getAllDecks();
-
-  this.StatByRarity = await  this.service.StatByRarity(0);
-
-   this.StatByRarity.forEach(e => {
-     this.d.push({y : e.count, rarity: e.rarity});
-   });
-    console.log(this.d);
-    this.updateChart(0)
-
     }
 
-  getChartInstance(chart: object) {
-    this.chart = chart;
-    this.updateChart(0);
-  }
-  chartOptions = {
-    animationEnabled: true,
-    title: {
-      text: "statistique par rareté de la carte "
-    },
-    data: [{
-      type: "pie",
-      startAngle: -90,
-      indexLabel: "{y}: {rarity}",
-      yValueFormatString: "#,###.##''",
-      dataPoints:[{}]
-    }]
-  }
+
 
 
 
@@ -125,11 +99,5 @@ chart : any;
     }
   }
 
-  async  updateChart(id : number){
-
-    this.chartOptions.data[0].dataPoints = this.d;
-this.chart.render();
-
-  }
 
 }
