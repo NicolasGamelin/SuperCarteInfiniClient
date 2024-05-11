@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {Deck} from "../../../models/models";
 import {ApiService} from "../../../services/api.service";
 
+
 @Component({
   selector: 'app-ad',
   templateUrl: './ad.component.html',
@@ -12,46 +13,44 @@ export class ADComponent implements OnInit, OnChanges{
   chart : any;
   StatByAttack: any[] = [];
   StatByDefense: any[] = [];
-  d: { defense: number, y: number}[] = [];
-  a: {attack: number, y: number}[] = [];
+  d: { x: string, y: number}[] = [];
+  a: {x: string, y: number}[] = [];
   constructor(public  Service:ApiService) {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  async ngOnChanges(changes: SimpleChanges) {
+
+
 
     this.updateChart();
-    console.log(this.d);
-    console.log(this.a);
+
   }
 
   ngOnInit() {
 
     this.updateChart();
-    console.log(this.d);
-    console.log(this.a);
+
   }
 
 
   getChartInstance(chart: object) {
     this.chart = chart;
     this.updateChart();
-    console.log(this.a);
+
   }
   chartOptions = {
     animationEnabled: true,
     title: {
-      text: "stat par A/D"
+      text: "Stat A/D"
     },
     axisX: {
-      labelAngle: -90,
-      interval: 1,
-
+      labelAngle: -90
+      , interval: 1
     },
     axisY: {
-      title: "nombre de carte",
-      interval: 1
+      title: "nombre de cartes"
+      , interval: 1
     },
-
 
     toolTip: {
       shared: false
@@ -70,16 +69,16 @@ export class ADComponent implements OnInit, OnChanges{
     },
     data: [{
       type: "column",
-      name: "attack",
-      legendText: "attack",
+      name: "attaque",
+      legendText: "attaque",
       showInLegend: true,
       dataPoints:[
         {}
       ]
     }, {
       type: "column",
-      name: "defense",
-      legendText: "defense",
+      name: "Defense",
+      legendText: "Defense",
       showInLegend: true,
       dataPoints:[
         {}
@@ -89,24 +88,30 @@ export class ADComponent implements OnInit, OnChanges{
 
   async updateChart() {
 
-
     this.StatByAttack = await this.Service.StatByrAttack(this.selectedDeckID);
-    this.StatByDefense = await this.Service.StatByDef(this.selectedDeckID);
+
+
     this.d = [];
     this.a = [];
-   /* this.StatByDefense.forEach(e => {
-      this.d.push({defense: e.Defense, y: e.count});
-    });
     this.StatByAttack.forEach(e => {
-      this.a.push({attack: e.attaque, y: e.count});
-    });*/
-    for (let  i =0; i < this.StatByDefense.length; i++) {
-      
-    }
+      this.a.push({x: e.valeur, y: e.attaque});
+      this.d.push({x: e.valeur, y: e.defense});
+    });
+
+
+
+   console.log(this.a);
+    console.log(this.d);
+
+
+
+
+
 
     this.chartOptions.data[0].dataPoints = this.a;
     this.chartOptions.data[1].dataPoints = this.d;
     this.chart.render();
+
 
   }
 
