@@ -23,6 +23,9 @@ export class GameListComponent implements OnInit{
 
   async joinMatch(matchid:number) {
 
+      let userId:string = localStorage.getItem("username")!;
+
+    this.hubService.hubConnection.invoke('Spectate', userId, matchid);
 
     this.hubService.hubConnection.on('redirectToMatch', (data: any) => {
       this.router.navigateByUrl('/match/'+data)

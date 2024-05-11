@@ -121,6 +121,7 @@ export class MatchService {
   }
 
   async applyEvent(event:any){
+    console.log(event);
     switch(event.$type){
       case "StartMatch": {
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -153,7 +154,7 @@ export class MatchService {
         let playerData = this.getPlayerData(event.PlayerId);
         if (playerData?.hand != undefined ){
           this.moveCard(playerData?.hand, playerData?.battleField, event.playableCardId);
-playerData.mana -= event.manaLost;
+            playerData.mana -= event.manaLost;
         }
 
         break;
@@ -212,8 +213,6 @@ if(card){
         break;
       }
 
-
-
       case "Thorn": {
         let playerData = this.getPlayerData(event.PlayerId);
 
@@ -222,7 +221,6 @@ if(card){
         break;
       }
 
-
       case "OneShot": {
         let playerData = this.getPlayerData(event.PlayerId);
 
@@ -230,8 +228,6 @@ if(card){
 
         break;
       }
-
-
 
       case "FirstStrike": {
         let playerData = this.getPlayerData(event.PlayerId);
@@ -249,9 +245,6 @@ if(card){
         break;
       }
 
-
-
-
       case "DrawCard": {
         let playerData = this.getPlayerData(event.PlayerId);
         if(playerData)
@@ -262,6 +255,7 @@ if(card){
 
         break;
       }
+
       case "EndMatch": {
         this.matchData!.winningPlayerId = event.WinningPlayerId;
         break;

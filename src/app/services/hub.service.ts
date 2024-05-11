@@ -38,6 +38,9 @@ export class hubService {
                 console.log("Event :\n"+data)
                 this.matchService.applyEvent(JSON.parse(data));
             })
+            this.hubConnection.on("notifyPLayers", (data: any) => {
+              alert(data.toString() + " regarde la partie");
+            })
           })
           .catch((err: any) => console.log('Error while starting connection: ' + err));
     }
