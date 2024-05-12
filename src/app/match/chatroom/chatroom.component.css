@@ -1,0 +1,10 @@
+.chatroom-body{
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+  padding: 3em;
+  display: block;
+  background: #ffffff;
+  color: black;
+}

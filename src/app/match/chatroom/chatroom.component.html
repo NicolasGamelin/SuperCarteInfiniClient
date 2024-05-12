@@ -1,0 +1,16 @@
+<div class="chatroom-body">
+  Bienvenue dans le salon de clavardage :
+  <br>
+  <br>
+
+  <input type="text" name="message" [(ngModel)]="message">
+  <button (click)="sendMessage(message,matchService.match?.id!)">
+    envoyer
+  </button>
+
+  <div *ngFor="let message of messages">
+
+      {{message.playerName}} : {{message.message}}
+
+  </div>
+</div>

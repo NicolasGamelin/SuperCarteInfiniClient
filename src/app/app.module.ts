@@ -27,6 +27,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {GameListComponent} from "./components/game-list/game-list.component";
+import {ChatroomComponent} from "./match/chatroom/chatroom.component";
 
 
 
@@ -47,7 +48,8 @@ import {GameListComponent} from "./components/game-list/game-list.component";
     PaquetComponent,
     CardsComponent,
     DeckComponent,
-    GameListComponent
+    GameListComponent,
+    ChatroomComponent
    ],
   imports: [
     BrowserModule,

@@ -120,3 +120,8 @@ export interface MatchInfo{
   playerAUsername:string;
   playerBUsername:string;
 }
+
+export interface Message{
+  playerName:string;
+  message:string;
+}

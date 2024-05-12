@@ -80,5 +80,13 @@ export class hubService {
         this.hubConnection.invoke('Surrender', matchId.toString(), userId.toString())
     }
 
+  async sendMessage(message:string, matchId:number){
+      let userId:string = localStorage.getItem("username")!;
+    if (this.hubConnection.state == "Disconnected"){
+      await this.connectToHub()
+    }
+    this.hubConnection.invoke('SendMessage', message, userId, matchId);
+  }
+
 
 }
