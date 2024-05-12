@@ -10,6 +10,7 @@ import {LoginComponent} from "./components/login/login.component";
 import {homeGuard} from "./home.guard";
 import {loginGuard} from "./login.guard";
 import {DeckComponent} from "./components/deck/deck.component";
+import { ClassementComponent } from './components/classement/classement.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'cards', component: CardsComponent },
       { path: 'store', component: StoreComponent },
       { path: 'deck', component: DeckComponent },
+      { path: 'classement', component: ClassementComponent },
       { path: '**', redirectTo: 'cards'}
 
   ], canActivate:[homeGuard] },

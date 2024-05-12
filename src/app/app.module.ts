@@ -45,7 +45,7 @@ import {MatSelectModule} from "@angular/material/select";
     CardsComponent,
     PaquetComponent,
     CardsComponent,
-    DeckComponent
+    DeckComponent,
    ],
   imports: [
     BrowserModule,

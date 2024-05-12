@@ -1,0 +1,35 @@
+<table style="width: 50%;">
+    <caption style="font-weight: bold">8 Meilleur Joueurs</caption>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Elo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let player of topPlayers; let i = index" [style.background-color]="player.name == currentPlayerName ? 'green' : null">
+            <td>{{i+1}}</td>
+            <td>{{player.name}}</td>
+            <td>{{player.elo}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<table style="width: 50%;">
+    <caption style="font-weight: bold">Votre classement</caption>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Elo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let player of closePlayers?.players; let i = index" [style.background-color]="player.name == currentPlayerName ? 'green' : null">
+            <td>{{i+1+closePlayers?.startRank!}}</td>
+            <td>{{player.name}}</td>
+            <td>{{player.elo}}</td>
+        </tr>
+    </tbody>
+</table>

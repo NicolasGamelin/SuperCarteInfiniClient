@@ -1,7 +1,7 @@
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom, Observable } from 'rxjs';
-import { Card, Paquet, Deck} from '../models/models';
+import { Card, Paquet, Deck, Player} from '../models/models';
 import { environment } from 'src/environments/environment';
 import {LoginDTO} from "../models/LoginDTO";
 import {RegisterDTO} from "../models/RegisterDTO";
@@ -11,6 +11,7 @@ import { Subject } from '@microsoft/signalr';
 import {ERROR} from "@angular/compiler-cli/src/ngtsc/logging/src/console_logger";
 import {Deckname} from "../models/Deckname";
 import {EditCardDTO} from "../models/EditCardDTO";
+import { playerRankDTO } from '../models/playerRankDTO';
 
 
 const LOCAL_STORAGE_KEY = 'username';
@@ -154,9 +155,15 @@ async Private()
     return result;
   }
 
+  async getClassementTop():Promise<Array<Player>>{
+    let result = await lastValueFrom(this.http.get<Player[]>(environment.apiUrl+'api/Account/getTopPlayers'));
+    return result
+  }
 
-
-
+  async getClosePlayers():Promise<playerRankDTO>{
+    let result = await lastValueFrom(this.http.get<playerRankDTO>(environment.apiUrl+'api/Account/getPlayersClose'));
+    return result
+  }
 
 async getAllDecks(){
   let r:Deck[] = await lastValueFrom(this.http.get<Deck[]>('https://localhost:7219/api/Deck/GetDecks'));
