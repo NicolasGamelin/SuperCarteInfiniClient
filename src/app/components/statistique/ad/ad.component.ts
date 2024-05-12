@@ -41,7 +41,7 @@ export class ADComponent implements OnInit, OnChanges{
   chartOptions = {
     animationEnabled: true,
     title: {
-      text: "Stat A/D"
+      text: "Statistique par attaque et défense"
     },
     axisX: {
       labelAngle: -90

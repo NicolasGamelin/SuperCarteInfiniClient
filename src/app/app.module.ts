@@ -30,6 +30,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {ADComponent} from "./components/statistique/ad/ad.component";
 import {CostComponent} from "./components/statistique/cost/cost.component";
 import {RarityComponent} from "./components/statistique/rarity/rarity.component";
+import {VictoryLoseComponent} from "./components/statistique/victory-lose/victory-lose.component";
 
 
 
@@ -53,7 +54,8 @@ import {RarityComponent} from "./components/statistique/rarity/rarity.component"
     StatistiqueComponent,
     ADComponent,
     CostComponent,
-    RarityComponent
+    RarityComponent,
+    VictoryLoseComponent
    ],
   imports: [
     BrowserModule,

@@ -1,17 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {Deck} from "../../models/models";
 import {ApiService} from "../../services/api.service";
+import {ThisReceiver} from "@angular/compiler";
 
 @Component({
   selector: 'app-statistique',
   templateUrl: './statistique.component.html',
   styleUrls: ['./statistique.component.css']
 })
-export class StatistiqueComponent implements OnInit{
+export class StatistiqueComponent implements OnInit, OnChanges{
   selectedDeckID:number = 0;
   decklist:Deck[] = [];
   selectedDeck:Deck | undefined;
-
+  Stat:any;
+Victoire : number  = 0;
+Defaite : number  = 0;
   constructor(public ServiceApi: ApiService) {
   }
 
@@ -21,6 +24,15 @@ export class StatistiqueComponent implements OnInit{
 
   async ngOnInit() {
     this.decklist = await this.ServiceApi.getAllDecks();
+this.Stat = await this.ServiceApi.victoryAndLose(this.selectedDeckID);
+this.Victoire = this.Stat.victoire
+this.Defaite = this.Stat.defaite
+  }
+  async ngOnChanges() {
+    this.decklist = await this.ServiceApi.getAllDecks();
+    this.Stat = await this.ServiceApi.victoryAndLose(this.selectedDeckID);
+    this.Victoire = this.Stat.victoire
+    this.Defaite = this.Stat.Defaite
   }
 
   async selectDeck(){
@@ -33,4 +45,5 @@ export class StatistiqueComponent implements OnInit{
 
   }
 
+  protected readonly ThisReceiver = ThisReceiver;
 }
