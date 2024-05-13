@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {hubService} from "../../services/hub.service";
-import {Message} from "../../models/models";
+import {Message, Player} from "../../models/models";
 import {MatchService} from "../../services/match.service";
 
 @Component({
@@ -15,15 +15,32 @@ export class ChatroomComponent implements  OnInit{
 
   ngOnInit(): void {
     this.hubService.hubConnection.on('showMessages', (data: Message) => {
+      for (let i = 0; i < this.mutedPlayers.length;i++){
+        if(data.playerName == this.mutedPlayers.at(i)){
+          return
+        }
+      }
       this.messages.push(data);
+
     })
     }
 
   message:string = "";
   messages:Message[] = [];
+  mutedPlayers:string[] = [];
+
 
   sendMessage(message:string, matchId:number){
     this.hubService.sendMessage(message,matchId);
   }
+
+  mutePlayer(name:string){
+    this.mutedPlayers.push(name);
+  }
+
+  banPlayer(name:string){
+    this.hubService.banPlayer(name);
+  }
+
 
 }

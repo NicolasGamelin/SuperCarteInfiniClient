@@ -1,16 +1,23 @@
 <div class="chatroom-body">
-  Bienvenue dans le salon de clavardage :
-  <br>
-  <br>
 
-  <input type="text" name="message" [(ngModel)]="message">
-  <button (click)="sendMessage(message,matchService.match?.id!)">
-    envoyer
-  </button>
+
+  <div class="send">
+    Bienvenue dans le salon de clavardage :
+    <br>
+    <br>
+    <input type="text" name="message" [(ngModel)]="message">
+    <button (click)="sendMessage(message,matchService.match?.id!)">
+      envoyer
+    </button>
+  </div>
 
   <div *ngFor="let message of messages">
 
       {{message.playerName}} : {{message.message}}
 
+  </div>
+
+  <div *ngFor="let player of matchService.players">
+    {{player}} <button (click)="mutePlayer(player)"> mute</button> <button *ngIf="player != matchService.matchData!.playerA.name! && player != matchService.matchData!.playerB.name!" (click)="banPlayer(player)"> ban</button>
   </div>
 </div>

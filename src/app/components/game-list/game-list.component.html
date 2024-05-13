@@ -3,3 +3,6 @@
     {{match.playerAUsername }} vs  {{match.playerBUsername}} <button (click)="joinMatch(match.matchId)"> regarder</button>
 
 </div>
+<div *ngIf="matches.length == 0">
+  Il y a présentement aucune partie en cours. 
+</div>

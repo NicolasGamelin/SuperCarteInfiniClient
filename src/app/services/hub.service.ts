@@ -38,8 +38,13 @@ export class hubService {
                 console.log("Event :\n"+data)
                 this.matchService.applyEvent(JSON.parse(data));
             })
-            this.hubConnection.on("notifyPLayers", (data: any) => {
-              alert(data.toString() + " regarde la partie");
+            this.hubConnection.on("notifyPLayers", (data: string) => {
+              alert(data + " regarde la partie");
+              this.matchService.players.push(data)
+            })
+            this.hubConnection.on("forceLeave", (data: any) => {
+              alert("Vous avez été banni de cette partie");
+              this.router.navigateByUrl('/');
             })
           })
           .catch((err: any) => console.log('Error while starting connection: ' + err));
@@ -87,6 +92,16 @@ export class hubService {
     }
     this.hubConnection.invoke('SendMessage', message, userId, matchId);
   }
+
+  async banPlayer(name:string){
+    if (this.hubConnection.state == "Disconnected"){
+      await this.connectToHub()
+    }
+    this.hubConnection.invoke('BanPlayer', name,this.matchService.match?.id);
+    this.matchService.removePlayer(name);
+  }
+
+
 
 
 }

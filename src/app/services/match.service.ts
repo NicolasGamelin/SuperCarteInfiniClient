@@ -1,4 +1,4 @@
-import { Card, MatchData, PlayableCard } from 'src/app/models/models';
+import {Card, MatchData, PlayableCard, Player} from 'src/app/models/models';
 import { PlayerData } from '../models/models';
 import { Injectable } from '@angular/core';
 import { Match } from '../models/models';
@@ -17,6 +17,7 @@ export class MatchService {
 
   opponentSurrendered:boolean = false;
   isCurrentPlayerTurn:boolean = false;
+  players:string[] = [];
 
   constructor() { }
 
@@ -28,6 +29,7 @@ export class MatchService {
     this.opponentSurrendered = false;
     this.isCurrentPlayerTurn = false;
     this.Card = null;
+    this.players = [];
   }
 
   playTestMatch(cards:Card[]){
@@ -118,6 +120,9 @@ export class MatchService {
     }
     this.playerData.maxhealth = this.playerData.health;
     this.adversaryData.maxhealth = this.adversaryData.health;
+
+    this.players.push(this.match.playerDataA.playerName);
+    this.players.push(this.match.playerDataB.playerName);
   }
 
   async applyEvent(event:any){
@@ -290,6 +295,14 @@ if(card){
       let index = src.findIndex(c => c.id == playableCardId);
       src.splice(index, 1);
       dst.push(playableCard);
+    }
+  }
+
+  removePlayer(name:string){
+    for(let i:number = 0; i< this.players.length;i++){
+      if(this.players.at(i) == name){
+        this.players.splice(i,1 );
+      }
     }
   }
 }
