@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { MatchService } from '../services/match.service';
 import { hubService } from '../services/hub.service';
-import {delay} from "rxjs";
+import {async, delay} from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -30,5 +30,9 @@ export class HomeComponent implements OnInit {
     this.hubService.hubConnection.on('redirectToMatch', (data: any) => {
       this.router.navigateByUrl('/match/'+data)
     })
+  }
+
+  async stopSearch(){
+    this.hubService.stopSearch(localStorage.getItem("username")!);
   }
 }

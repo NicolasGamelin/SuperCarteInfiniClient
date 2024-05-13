@@ -11,6 +11,7 @@ import {homeGuard} from "./home.guard";
 import {loginGuard} from "./login.guard";
 import {DeckComponent} from "./components/deck/deck.component";
 import {StatistiqueComponent} from "./components/statistique/statistique.component";
+import { ClassementComponent } from './components/classement/classement.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'store', component: StoreComponent },
       { path: 'deck', component: DeckComponent },
       { path: 'Stat', component: StatistiqueComponent },
+      { path: 'classement', component: ClassementComponent },
       { path: '**', redirectTo: 'cards'}
 
   ], canActivate:[homeGuard] },

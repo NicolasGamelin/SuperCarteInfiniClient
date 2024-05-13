@@ -17,6 +17,7 @@ export class MatchService {
 
   opponentSurrendered:boolean = false;
   isCurrentPlayerTurn:boolean = false;
+  eloDiff:number = 0;
 
   constructor() { }
 
@@ -64,12 +65,14 @@ export class MatchService {
       playerA: {
         id: 1,
         name: "Adversaire",
-        money: 0
+        money: 0,
+        elo: 1000
       },
       playerB: {
         id: 2,
         name: "Joueur",
-        money: 0
+        money: 0,
+        elo: 1000
       },
       winningPlayerId: -1
     }
@@ -263,7 +266,15 @@ if(card){
         break;
       }
       case "EndMatch": {
-        this.matchData!.winningPlayerId = event.WinningPlayerId;
+        if (this.matchData!.winningPlayerId == 0 || this.matchData!.winningPlayerId == null){
+          this.matchData!.winningPlayerId = event.WinningPlayerId;
+          if(this.matchData?.winningPlayerId == this.currentPlayerId){
+            this.eloDiff = event.eloDiffWinner;
+          }
+          else{
+            this.eloDiff = event.eloDiffLoser;
+          }
+        }
         break;
       }
     }

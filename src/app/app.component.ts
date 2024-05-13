@@ -9,10 +9,11 @@ import { Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'supercartesinfinies';
 
   public money:Observable<number> = this.getMoney();
+  public elo:number = 0;
 
   constructor(public router: Router, public matchService:MatchService,public service:ApiService) { 
     service.emitChangeSource.subscribe({
@@ -28,6 +29,10 @@ export class AppComponent {
         
       }
     });
+  }
+
+  async ngOnInit() {
+    this.elo = await this.getElo();
   }
 
   isLogged(){
@@ -48,5 +53,9 @@ export class AppComponent {
 
   getMoney(): Observable<number>{
     return this.service.getMoney();
+  }
+
+  async getElo(){
+    return await this.service.getElo();
   }
 }
