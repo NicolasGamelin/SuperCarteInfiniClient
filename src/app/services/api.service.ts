@@ -164,11 +164,43 @@ async Private()
     let result = await lastValueFrom(this.http.get<Player[]>(environment.apiUrl+'api/Account/getTopPlayers'));
     return result
   }
+  async StatByCost(id: number): Promise<any[]>{
+    let result = await lastValueFrom(this.http.get<any>(environment.apiUrl+'api/Statistiques/StatCost?DeckId='+id));
+    console.log(result);
+    return result;
+  }
 
   async getClosePlayers():Promise<playerRankDTO>{
     let result = await lastValueFrom(this.http.get<playerRankDTO>(environment.apiUrl+'api/Account/getPlayersClose'));
     return result
   }
+  async StatByrAttack(id: number): Promise<any[]>{
+    let result = await lastValueFrom(this.http.get<any>(environment.apiUrl+'api/Statistiques/StatAttack?DeckId='+id));
+    console.log(result);
+    return result;
+  }
+
+  async StatByDef(id: number): Promise<any[]>{
+    let result = await lastValueFrom(this.http.get<any>(environment.apiUrl+'api/Statistiques/StatDef?DeckId='+id));
+    console.log(result);
+    return result;
+  }
+  async StatByRarity(id: number): Promise<any[]>{
+    let result = await lastValueFrom(this.http.get<any>(environment.apiUrl+'api/Statistiques/StatRarity?DeckId='+id));
+
+    console.log(result);
+    return result;
+  }
+
+  async victoryAndLose(id: number): Promise<any[]>{
+    let result = await lastValueFrom(this.http.get<any>(environment.apiUrl+'api/Statistiques/StatVictoireDefaite?DeckId='+id));
+
+    console.log(result);
+    return result;
+  }
+
+
+
 
 async getAllDecks(){
   let r:Deck[] = await lastValueFrom(this.http.get<Deck[]>('https://localhost:7219/api/Deck/GetDecks'));

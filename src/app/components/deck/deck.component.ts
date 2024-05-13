@@ -13,12 +13,19 @@ import { MatInputModule } from '@angular/material/input';
 export class DeckComponent implements OnInit{
 
 
+
+
+
   cards:OwnedCard[] = [];
   isActive:boolean = false;
   selectedDeckID:number = 0;
   selectedCardID:number = 0;
   decklist:Deck[] = [];
   name:string = "";
+
+
+
+
   deckname:Deckname = new Deckname("");
   selectedDeck:Deck | undefined;
 
@@ -29,7 +36,13 @@ export class DeckComponent implements OnInit{
     this.decklist = await this.service.getAllDecks();
     }
 
- async createDeck(name:string){
+
+
+
+
+
+
+  async createDeck(name:string){
     this.deckname.name = name;
     let deck:Deck | null;
     console.log(name);
@@ -85,5 +98,6 @@ export class DeckComponent implements OnInit{
       }
     }
   }
+
 
 }

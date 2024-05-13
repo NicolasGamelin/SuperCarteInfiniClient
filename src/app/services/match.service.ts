@@ -101,7 +101,7 @@ export class MatchService {
     this.matchData = matchData;
     this.match = matchData.match;
     this.currentPlayerId = currentPlayerId;
-
+// TODO faire un sort de l'index des 2 battlefields (la methode sort RETOURNE un array)
     if(this.match.playerDataA.playerId == this.currentPlayerId)
     {
       this.playerData = this.match.playerDataA!;
