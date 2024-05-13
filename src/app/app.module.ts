@@ -10,6 +10,7 @@ import { CardComponent } from './components/card/card.component';
 import { HomeComponent  } from './home/home.component';
 import { MatchComponent } from './match/match.component';
 import { BattlefieldComponent } from './match/battlefield/battlefield.component';
+import { StatistiqueComponent } from './components/statistique/statistique.component';
 import { PlayerhandComponent } from './match/playerhand/playerhand.component';
 import { EnemyhandComponent } from './match/enemyhand/enemyhand.component';
 import { HealthComponent } from './match/health/health.component';
@@ -26,6 +27,10 @@ import {DeckComponent} from "./components/deck/deck.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import {ADComponent} from "./components/statistique/ad/ad.component";
+import {CostComponent} from "./components/statistique/cost/cost.component";
+import {RarityComponent} from "./components/statistique/rarity/rarity.component";
+import {VictoryLoseComponent} from "./components/statistique/victory-lose/victory-lose.component";
 
 
 
@@ -45,7 +50,12 @@ import {MatSelectModule} from "@angular/material/select";
     CardsComponent,
     PaquetComponent,
     CardsComponent,
-    DeckComponent
+    DeckComponent,
+    StatistiqueComponent,
+    ADComponent,
+    CostComponent,
+    RarityComponent,
+    VictoryLoseComponent
    ],
   imports: [
     BrowserModule,

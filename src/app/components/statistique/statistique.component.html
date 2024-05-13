@@ -1,0 +1,26 @@
+<mat-form-field>
+  <mat-label>Decks</mat-label>
+  <mat-select [(ngModel)]="selectedDeckID" (ngModelChange)="selectDeck()" name="selectedDeck" >
+    <mat-option value="0">aucun</mat-option>
+    <mat-option *ngFor="let deck of decklist" value="{{deck.id}}">{{ deck.name }}</mat-option>
+  </mat-select>
+</mat-form-field>
+<app-victory-lose [selectedDeckID]="selectedDeckID" >
+
+</app-victory-lose>
+
+<br/>
+
+<app-rarity [selectedDeckID]="selectedDeckID" >
+
+</app-rarity>
+<br/>
+<app-cost [selectedDeckID]="selectedDeckID" >
+
+</app-cost>
+<br/>
+<app-ad [selectedDeckID]="selectedDeckID" >
+
+</app-ad>
+
+
