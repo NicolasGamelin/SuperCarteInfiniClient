@@ -28,6 +28,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {GameListComponent} from "./components/game-list/game-list.component";
 import {ChatroomComponent} from "./match/chatroom/chatroom.component";
+import {SpechandComponent} from "./match/spechand/spechand.component";
 
 
 
@@ -49,7 +50,8 @@ import {ChatroomComponent} from "./match/chatroom/chatroom.component";
     CardsComponent,
     DeckComponent,
     GameListComponent,
-    ChatroomComponent
+    ChatroomComponent,
+    SpechandComponent
    ],
   imports: [
     BrowserModule,

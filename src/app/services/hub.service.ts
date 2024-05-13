@@ -15,6 +15,8 @@ export class hubService {
 
     constructor(public router: Router, public matchService: MatchService) {}
 
+   perspective:number = 0;
+
     async connectToHub(){
         this.hubConnection.onreconnecting((error?: Error) => {
             console.log("Hub connection lost, reconnecting...");
@@ -45,6 +47,9 @@ export class hubService {
             this.hubConnection.on("forceLeave", (data: any) => {
               alert("Vous avez été banni de cette partie");
               this.router.navigateByUrl('/');
+            })
+            this.hubConnection.on("leaving", (data: string) => {
+              this.matchService.removePlayer(data);
             })
           })
           .catch((err: any) => console.log('Error while starting connection: ' + err));
@@ -99,6 +104,11 @@ export class hubService {
     }
     this.hubConnection.invoke('BanPlayer', name,this.matchService.match?.id);
     this.matchService.removePlayer(name);
+  }
+
+  async leave(){
+    this.hubConnection.invoke("Leave",this.matchService.match?.id!, localStorage.getItem('username')!)
+    this.router.navigateByUrl('/');
   }
 
 
