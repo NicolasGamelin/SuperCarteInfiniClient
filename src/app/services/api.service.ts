@@ -136,6 +136,11 @@ async Private()
     return this.http.get<any>('https://localhost:7219/api/Account/getMoney');
   }
 
+  async getElo(): Promise<number>{
+    let result = await lastValueFrom(this.http.get<number>(environment.apiUrl+'api/account/GetElo'));
+    return result;
+  }
+
   getMoneyForWin(): Observable<number>{
     return this.http.get<any>('https://localhost:7219/api/Account/getMoneyForWin');
   }

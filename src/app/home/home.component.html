@@ -1,5 +1,5 @@
 
-<div *ngIf="searching" (click)="searching = false"  class="unfocus"></div>
+<div *ngIf="searching" (click)="searching = false; stopSearch()"  class="unfocus"></div>
   <div style="display: flex; margin: 20px; justify-content: center;">
     <button mat-raised-button  [routerLink]="['/cards']" color="primary" style="margin-right: 20px;"  >Mes Cartes</button>
     <button mat-raised-button  [routerLink]="['/store']" color="primary" style="margin-right: 20px;"  >Magasin</button>
@@ -16,7 +16,7 @@
 
     <div>
 
-      <button (click)="searching = false" mat-raised-button style="justify-content: start">
+      <button (click)="searching = false; stopSearch()" mat-raised-button style="justify-content: start">
         Annuler
       </button>
     </div>

@@ -76,4 +76,11 @@ export class hubService {
         }
         this.hubConnection.invoke('Surrender', matchId.toString(), userId.toString())
     }
+
+    async stopSearch(userid: string){
+        if (this.hubConnection.state == "Disconnected"){
+            await this.connectToHub()
+        }
+        this.hubConnection.invoke('stopSearch', userid)
+    }
 }
