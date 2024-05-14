@@ -134,6 +134,7 @@ export class MatchService {
         if(event.Mana != null){
           playerData!.mana += event.Mana;
           console.log(playerData)
+
         }
 
         break;
@@ -249,7 +250,62 @@ if(card){
         break;
       }
 
+      case "LightningStrike": {
+        let playerData = this.getPlayerData(event.PlayerId);
 
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+      case "Chaos": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+      case "Earthquake": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+      case "Poison": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+      case "RandomPain": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+      case "Resurrect": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+      case "Boost": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
+      case "stun": {
+        let playerData = this.getPlayerData(event.PlayerId);
+
+        let card =  playerData?.battleField.find(c => c.id == event.PlayableCardId);
+
+        break;
+      }
 
 
       case "DrawCard": {
